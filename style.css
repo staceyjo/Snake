@@ -1,0 +1,38 @@
+/* Centering grid content in the middle of the screen */
+body {
+    height: 100vh;
+    width: 100 vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: black;
+}
+
+#game-board {
+    background-color:rgb(132, 180, 49);
+    /* vmin ensures a square shape that's as large as possible to fill the entire screen, based on the size of the screen */
+    width: 100vmin;
+    height: 100vmin; 
+    /* This sets up the grid, rows and columns all the same size*/
+    display: grid;
+    grid-template-rows: repeat(21, 1fr);
+    grid-template-columns: repeat(21, 1fr);
+}
+
+/* Styling the snake element */
+.snake {
+    background-color: darkslategrey;
+    /* The border around the snake element scales with the size of the page */
+    border: .25vmin;
+    border-color: black;
+}
+
+/* Styling the snake element */
+.food {
+    background-color: orangered;
+    
+    /* The border around the food element scales with the size of the page */
+    border: .25vmin;
+    border-color: black;
+}
