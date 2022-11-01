@@ -34,18 +34,26 @@ let y = 4
 
 let snake = [
     // we need to have multiple objects each with x and y properties
-    {x:0, y:0},
-    {x:1, y:0},
-    {x:2, y:0},
+    // if we change all the y values to 4, it will move the snake to the 5th row
+    // if we change the x values to 3, 4, 5 it will occupy the 4th,5th and 6th column
+    {x:0, y:4},
+    {x:1, y:4},
+    {x:2, y:4},
 ]
 
 // to draw the snake, we need to loop through the snake array and draw each cell individually
 // to do that we use a for each loop
-
 snake.forEach(function(cell) {
     let x = cell.x;
     let y = cell.y;
     gameboard.children[(width * y) + x].classList.add("snake");
 })
 
-
+// to get the snake to move by pressing the spacebar:
+// onkeydown function is used when you press on a key, i.e the spacebar
+// keyboardEvent is the object
+// when you open the console, you can see everytime you press the any key
+// each key has a code, "Space", "ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown", "Enter", "Escape"
+onkeydown = (function(keyboardEvent) {
+    console.log(keyboardEvent);
+})
