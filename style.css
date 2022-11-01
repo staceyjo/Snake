@@ -27,9 +27,18 @@ h1 {
     height: 500px;
     
     /* This sets up the grid, rows and columns all the same size*/
+    /*For now- I'm going to set it to 12 x 12*/
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
+
+}
+
+/* The divs inside the game board */
+#game-board-div {
+    border:black;
+    border:1px;
+    border: dotted;
 
 }
 
