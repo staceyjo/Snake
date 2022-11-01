@@ -1,6 +1,6 @@
 body {
     height: 100vh;
-    width: 100 vw;
+    width: 100vw;
     margin: 0;
     background-color: black;
 }
@@ -84,10 +84,13 @@ h1 {
 .snake {
     background-color: darkslategrey;
     /* The border around the snake element scales with the size of the page */
-    border: .25vmin;
-    border-color: black;
+    /* border: .25vmin; */
+    border-color: #e3ee0f;
+    border:solid;
+    /* border: 10px; */
     width: 500 px;
     height: 500 px;
+    border-radius: 20%;
 }
 
 /* Styling the snake element */
