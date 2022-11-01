@@ -11,7 +11,7 @@ h1 {
 
 }
 
-#game-board {
+#gameboard {
 
     /* Picking a green reminscent of the old nokia phone screen color */
     background-color: #65ab00;
@@ -35,7 +35,7 @@ h1 {
 }
 
 /* The divs inside the game board */
-#game-board>div {
+#gameboard>div {
     border:black;
     border:1px;
     border: dotted;
