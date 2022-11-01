@@ -35,11 +35,10 @@ h1 {
 }
 
 /* The divs inside the game board */
-#game-board-div {
+#game-board>div {
     border:black;
     border:1px;
     border: dotted;
-
 }
 
 /* Styling the snake element */
