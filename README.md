@@ -14,11 +14,13 @@ https://staceyjo.github.io/Snake/
 5. Unsolved problems, etc
 
 Notes about my game: 
-The game consists of controlling a very hungry snake element to catch "fruits" (made of a few pixels each) without crashing in the walls or turning in on itself. 
+The game consists of controlling a very hungry snake element to catch "fruits" (made of a few pixels each) without crashing in the walls or turning in on itself. Use the arrow keys to change the direction of the snake to eat and avoid the walls. This game was originally released in 1999.
 
 For each item the snake eats, it grows longer which eventually makes it harder for the snake to avoid the wall or part of its body. 
 
 If the snake hits a wall or part of its body, that ends the game. 
+
+// To restart you need to refresh- but I want to create a button
 
 
 
