@@ -51,3 +51,47 @@ Recommended Features
 
 - GitHub Pages: 
 https://staceyjo.github.io/Snake/
+
+Technical Demonstration: 
+
+- Be approximately 5 minutes in length
+
+Remember:
+If you didn’t complete your game. It’s okay! BREATHE! It is common for many to not finish.
+Practice selling yourself, love your craft, and pretend you’re presenting to your future employer.
+
+Do not sell yourself short. Only show things that are working or present positively if nothing is working. 
+
+Save all the technical challenges towards the end.
+
+Have your code ready on your screen, and your game running on the browser. 
+
+Be prepared!
+
+Respect, boundaries, rules, and expectations still apply.
+
+Show off all features of the app
+
+Show us your game in the browser
+
+Play a couple of rounds
+
+Explain the technical details
+
+Show your code - we don’t have a lot of time to show everything, but show which ones you were proud of, new things you learned, and/or successes
+
+Explain the technical challenges
+
+This is the only time you will talk about blockers, and challenges
+
+Try not to say negative comments about yourself, and just focus on the challenges
+
+Explain which improvements you might make
+
+Blockers and challenges goals
+
+Time management improvements
+
+First project thoughts, and challenges
+
+Be prepared to answer questions from the instructors and other students.
