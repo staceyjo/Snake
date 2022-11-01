@@ -11,6 +11,12 @@ h1 {
 
 }
 
+p {
+    color: white;
+    text-align: center;
+
+}
+
 #gameboard {
 
     /* Picking a green reminscent of the old nokia phone screen color */
@@ -21,24 +27,24 @@ h1 {
     to fill the entire screen, based on the size of the screen */
     /* width: 100vmin; */
     /* height: 100vmin;  */
-    
+
     /* But if I can figure it out- I want the game to appear inside of a large Nokia phone */
     width: 500px;
     height: 500px;
-    
+
     /* This sets up the grid, rows and columns all the same size*/
     /*For now- I'm going to set it to 12 x 12*/
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
-
 }
 
 /* The divs inside the game board */
 #gameboard>div {
-    border:black;
-    border:1px;
+    border: black;
+    border: 1px;
     border: dotted;
+    /* display: flex; */
 }
 
 /* Styling the snake element */
@@ -59,4 +65,3 @@ h1 {
     border: .25vmin;
     border-color: black;
 }
-

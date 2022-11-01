@@ -1,68 +1,53 @@
 <!-- 1. Created boilerplate HTML with ! enter  -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Snake</title>
-        <link rel="stylesheet" href="/style.css">
-        <!-- Module has seperate js files instead of one large one -->
-        <script src = "/script.js" defer></script>
-    </head>
-    <body>
-        <h1>Snake Game</h1>
 
-        <!-- Creating the game board -->
-        <div id ="gameboard">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>        
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <link rel="stylesheet" href="/style.css">
+    <!-- Module has seperate js files instead of one large one, but I'm fine with one large one for now -->
+    <script type="text/javascript" defer src="/script.js"></script>
+</head>
+
+<body>
+    <h1>Nokia 3310 Snake Game</h1>
+
+     <!-- This is our pop-up button to ask if the player wants to start the game -->
+     <div class="begin">
+        <button class="start">START</button>
+    </div>
+
+    <!-- Creating score board display -->
+    <div class="scoreDisplay">
+        <p>Player 1 Score: <span id="score-span">0</span></p>
+        <p>Player 2 Score: <span id="score-span">0</span></p>
+    </div>
+
+
+    <!-- Creating the game board -->
+
+    <div id="gameboard">
+        <!-- Creating grid for snake to scrawl around in -->
+        <div></div>
+        
+    </div>
+
+    <!-- These are all the buttons the user can use to move around in the game -->
+    <div class = "button">
+        <button class = "top">top</button>
+        <button class = "right">bottom</button>
+        <button class = "left">left</button>
+        <button class = "right">right</button>
+        </button>
+    </div>
+
+    <!-- This is our pop-up button to ask if the player wants to play again -->
+    <div class="popup">
+        <button class="playAgain">play again</button>
+    </div>
+</body>
+
 </html>
