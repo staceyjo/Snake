@@ -66,17 +66,16 @@ let previousDirection = "";
 
 // New variable to have the snake eat food target and grow longer with each food item
 // we'll need to add this to the redraw 
-let food = {
-    x: 2,
-    y: 2
-};
+let food;
     // right now, nothing is keeping track of our score, so we need to add a variable 
     // that keeps track of the score everytime the snake eats an apple
 let score = 0;
 // let gameState = "ready"; // ready, running, over
 // let timeoutInterval = 180;
 
-// relocateApple();
+
+// Calling this here places the food at a random location  whenever page is loaded
+relocateFood();
 
 // Calling function when you first load the page to redraw the user interface
 redrawUserInterface()
