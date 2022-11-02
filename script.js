@@ -64,7 +64,7 @@ let previousDirection = "";
 // we'll need to add this to the redraw 
 let food = {
     x: 2,
-    y: 2,
+    y: 2
 };
 // let score = 0;
 // let gameState = "ready"; // ready, running, over
@@ -127,9 +127,8 @@ function updateStateOfGame() {
         //     y: currentHeadOfSnake.y
         // }
 
-        // update the update state function to reflect new change in directions
+        // update the update state function to reflect new head of the snake
     let nextHeadOfSnake =  {
-        
         x: currentHeadOfSnake.x,
         y: currentHeadOfSnake.y
     };
@@ -160,12 +159,31 @@ function updateStateOfGame() {
         nextHeadOfSnake.x++;
     }
 
-
-    // .push adds the next head to the end of the existing array
+        // .push adds the next head to the end of the existing array
+        // placing this here because regardless of whether or not the
+        // snake eats the food source, we always need to push the next head
+        // of the snake on top of the current head
     snake.push(nextHeadOfSnake)
+
+        // At the moment when the snake goes after the food source, nothing happens
+        // we want the snake to grow by one cell everytime it encounters the position
+        // where the food currently is
+
+        // then we want the position of the food source to change to somewhere else on the grid
+        // if the next head of the snake is the same position as the food source
+        // then we know the snake is eating the food
+
+        // but we only want to remove the first element  of the snake array if we are eating the food source
+        // so we'll add an else statement
+
+    if(nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
+        // eating the apple
+
+    } else {
+            //.shift removes the first element of the existing snake array
+        snake.shift()
+    }
    
-    //.push removes the first element of the existing snake array
-    snake.shift()
 }
 // function to redraw based on user input
 function redrawUserInterface(){
@@ -181,11 +199,11 @@ function redrawUserInterface(){
         gameboard.children[(width * y) + x].classList.add("snake");
     })
 
-    // Adding a new section to the redraw user interface function 
-    // to show our food. Want the snake to eat the food and grow in length
+    // Drawing the food
+    // Adding a new section to the redraw user interface to show our food. 
+    // Want the snake to eat the food and grow in length by one cell each time
     // so instead of using the x and y coordinates from the snake
     // we use food.x and food.y
-
 
     gameboard.children[(width * food.y) + food.x].classList.add("food");
 
@@ -213,7 +231,8 @@ onkeydown = (function(keyboardEvent) {
 
     // This allows the snake to move directions
     // adding the previousdirection in the opposite so the snake cannot
-    // fold back on itself
+    // fold back on itself by only moving in a direction that is not the
+    // complete opposite of the previous direction
     if(code === "ArrowUp" && previousDirection !== "down") {
         direction = "up";
     }
