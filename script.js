@@ -24,8 +24,6 @@ const scoreSpan = document.querySelector("#score-span");
 
     // playAgain.addEventListener("click", replay);
 
-
-
     // Making certain squares change color to represent the snake and the food
     // gameboard.children will give me all of the divs on the board
     //.classList.add() will add a new class to the gameboard
@@ -55,7 +53,6 @@ let snake = [
     {x:4, y:4},
     {x:5, y:4}, // head of snake
 ]
-
     // defining the direction of the snake, by default we are setting snake to move to the right
 let direction = "right";
 
@@ -81,7 +78,6 @@ let gameState = "ready"; // ready, running, over is start, playing, end
     // this is supposed to gradually decrease by 10% each time the snake eats
 let timeoutInterval = 300;
 
-
     // Calling this here places the food at a random location  whenever page is loaded
 relocateFood();
 
@@ -99,7 +95,6 @@ function start() {
         // the slither function will be called after 300 milliseconds
     setTimeout(slither, timeoutInterval)
 }
-
     // to draw the snake, we need to loop through the snake array and draw each cell individually
     // to do that we use a for each loop
     // snake.forEach(function(cell) {
@@ -127,7 +122,6 @@ function slither() {
     }
     
 }
-
     // function to update the state of the game everytime the snake moves by 1 cell at a time
     // by updating the contents of the snake array
     // calculates the next head of the snake based on the current head of the snake
@@ -155,7 +149,6 @@ function updateStateOfGame() {
     };
 
         // these if statements deal with the change in direction for up, down, right and left:
-        
         // for up we decrement the y value
         // because if the snake is traveling up, the y yalue is heading towards zero
     if(direction === "up") {
@@ -310,8 +303,6 @@ function relocateFood() {
     }
 
 }
-
-
     // Initial game kick off happens in the onkeydown function
     // onkeydown function is used when you press on a key, i.e the spacebar
     // keyboardEvent is the object
@@ -326,22 +317,20 @@ onkeydown = (function(keyboardEvent) {
         // This just prints the keyboard code strings for each press
     console.log(code)
 
-        // // This triggers the game to start when the spacebar is pressed
-    // if(code === "Space" && gameState === "running")  {
+            // // This triggers the game to start when the spacebar is pressed
+        // if(code === "Space" && gameState === "running")  {
         
 
         // This triggers game to start if any key is pressed
-
     if(gameState === "ready") {
 
         // invoking start function to start the game if gameState if ready
         start();
         
-        // move the snake when "Space" === code by 
-        // invoking the function slither
-    // slither()
+            // move the snake when "Space" === code by 
+            // invoking the function slither
+        // slither()
     }
-
         // This allows the snake to move directions
         // adding the previousdirection in the opposite so the snake cannot
         // fold back on itself by only moving in a direction that is not the
