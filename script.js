@@ -1,7 +1,5 @@
 // Creating a gameboard object I can manipulate
 // so I don't have to create 144 divs within the gameboard
-
-
 // This wasn't working at first. 
 // Make sure you add width and height if you do this again
 // Altering the repeat to width * height will automatically change
@@ -12,6 +10,15 @@ const height = 12;
 const gameboard = document.querySelector("#gameboard");
 const scoreSpan = document.querySelector("#score-span");
 // gameboard.innerHTML = "<div></div>".repeat(width * height);
+
+// let popup = document.querySelector(".popup"); 
+// let playAgain = document.querySelector(".playAgain");
+// let left = document.querySelector(".left") 
+// let bottom = document.querySelector(".bottom") 
+// let right = document.querySelector(".right") 
+// let up = document.querySelector(".top") 
+
+// playAgain.addEventListener("click", replay);
 
 
 
@@ -52,15 +59,21 @@ let direction = "right";
 // or up to down---we don't want it to be able to do this...
 // So we need a way to track the previous direction
 let previousDirection = "";
-// let apple;
+
+// New variable to have the snake eat food target and grow longer with each food item
+// we'll need to add this to the redraw 
+let apple = {
+    x: 2,
+    y: 2,
+};
 // let score = 0;
 // let gameState = "ready"; // ready, running, over
 // let timeoutInterval = 180;
 
 // relocateApple();
 
-// Calling function when you first load the page to redraw (based on user input)
-redrawUserInput()
+// Calling function when you first load the page to redraw the user interface
+redrawUserInterface()
 
 // function start() {
 //     gameState = "running";
@@ -78,15 +91,15 @@ redrawUserInput()
 // to get the snake to move by pressing the spacebar:
 
 // first we need a function that will update the state
-// of the game and redraw the snake based on the user input
+// of the game and redraw the snake for the user interface
 
 function slither() {
         // update the state of the game by updating the contents of the snake array
     updateStateOfGame()
 
-        // redraw based on user input
+        // redraw user interface
         // the last object in the snake array is going to be the head of the snake
-    redrawUserInput()
+    redrawUserInterface()
 
         // schedule step if game is still runnning
 //     if(gameState === "running") {
@@ -155,7 +168,8 @@ function updateStateOfGame() {
     snake.shift()
 }
 // function to redraw based on user input
-function redrawUserInput(){
+function redrawUserInterface(){
+
     // This resets all of the divs on the gameboard
     gameboard.innerHTML = "<div></div>".repeat(width * height);
 
@@ -166,6 +180,9 @@ function redrawUserInput(){
         let y = cell.y;
         gameboard.children[(width * y) + x].classList.add("snake");
     })
+
+    // Adding a new section to the redraw user interface function 
+    // to show our food. Want the snake to eat the food and grow in length
 
 }
 
@@ -179,7 +196,8 @@ onkeydown = (function(keyboardEvent) {
 
     // Moving the snake when "Space" keyboard event takes place
     let code = keyboardEvent.code;
-    // This just prints tye keyboard code
+
+    // This just prints the keyboard code strings for each press
     console.log(code)
     if(code === "Space")  {
         
@@ -206,8 +224,6 @@ onkeydown = (function(keyboardEvent) {
     if(code === "ArrowRight" && previousDirection !== "left") {
         direction = "right";
     }
-
-    // update the update state function to reflect new change in directions
 
 })
 

@@ -2,7 +2,7 @@ body {
     height: 100vh;
     width: 100vw;
     margin: 0;
-    background-color: black;
+    background-color: #183693;
 }
 
 h1 {
@@ -43,6 +43,7 @@ h1 {
     /* height: 100px; */
     /* top: 100px; */
     /* left: 100px; */
+    /* display: flex; */
     display: grid;
     justify-content: center;
     align-items: center;
@@ -52,7 +53,7 @@ h1 {
 #gameboard {
 
     /* Picking a green reminscent of the old nokia phone screen color */
-    background-color: #65ab00;
+    background-color: #A8C64E;
 
     /* If I wanted the game to take up the entire page: 
     vmin ensures a square shape that's as large as possible 
@@ -82,7 +83,7 @@ h1 {
 
 /* Styling the snake element */
 .snake {
-    background-color: darkslategrey;
+    background-color: #565656;
     /* The border around the snake element scales with the size of the page */
     /* border: .25vmin; */
     border-color: #e3ee0f;
