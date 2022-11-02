@@ -228,18 +228,35 @@ function redrawUserInterface(){
 // to find the new position, we can use Math.random to find a
 // random number between and 11
 function relocateFood() {
+        //generate random number bewtween 0 and 1
+        // Math.random()
+
+        //remove decimal places
+        // Math.floor()
+
+        // generates random number between 0 and 11 (width is 12)
+        // Math.floor(Math.random() * width)
+
     food = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * width)
     };
-    //generate random number bewtween 0 and 1
-    // Math.random()
 
-    //remove decimal places
-    // Math.floor()
+        // Issue I'm running into is the food lands on top of 
+        // the snake during a game start or after the snake eats the food
+        // the new food's location is on top of the snake
+        // that shouldn't happen. So to prevent that we need
+        // to check if the snake location and the relocated food share the
+        // intercept. using .some() method
+    if(snake.some(cell => cell.x === food.x && cell.y === food.y)) {
+        // if this is true, relocate the food
+        // calling the function on itself now makes this a recursive function
+        // it will keep running the function until it finds a location where the snake is
+        // not located
+        relocateFood()
+    }
 
-    // generates random number between 0 and 11 (width is 12)
-    // Math.floor(Math.random() * width)
+
 }
 
 
