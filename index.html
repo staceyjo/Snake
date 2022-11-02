@@ -13,7 +13,11 @@
 </head>
 
 <body>
-    <h1>Nokia 3310 Snake Game</h1>
+    <div class="container">
+        <div class="GamerWord">SNAKE</div>
+    </div>
+     
+    <div class="scanlines"></div>
 
     <!-- Creating score board display -->
     <div class="scoreDisplay">
@@ -21,33 +25,35 @@
         <p>Player 2 Score: <span id="score-span">0</span></p>
     </div>
 
+    <!-- Hiding these for now- because they don't do anything -->
+
       <!-- This is our pop-up button to ask if the player wants to start the game -->
-      <div class="begin">
+    <!-- <div class="begin">
         <button class="start">START</button>
-    </div>
+    </div> -->
+        <!-- These are all the buttons the user can use to move around in the game -->
+        <!-- <div class = "button">
+            <button class = "top">top</button>
+            <button class = "right">bottom</button>
+            <button class = "left">left</button>
+            <button class = "right">right</button>
+            </button>
+        </div> -->
+    
+        <!-- This is our pop-up button to ask if the player wants to play again -->
+        <!-- <div class="popup">
+            <button class="playAgain">play again</button>
+        </div> -->
+    
 
 
     <!-- Creating the game board -->
 
     <div id="gameboard">
         <!-- Creating grid for snake to scrawl around in -->
-        <div></div>
-        
+        <div></div>  
     </div>
 
-    <!-- These are all the buttons the user can use to move around in the game -->
-    <div class = "button">
-        <button class = "top">top</button>
-        <button class = "right">bottom</button>
-        <button class = "left">left</button>
-        <button class = "right">right</button>
-        </button>
-    </div>
-
-    <!-- This is our pop-up button to ask if the player wants to play again -->
-    <div class="popup">
-        <button class="playAgain">play again</button>
-    </div>
 </body>
 
 </html>
