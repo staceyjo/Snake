@@ -70,7 +70,9 @@ let food;
     // right now, nothing is keeping track of our score, so we need to add a variable 
     // that keeps track of the score everytime the snake eats an apple
 let score = 0;
-// let gameState = "ready"; // ready, running, over
+
+    // need a way to end the game
+let gameState = "running"; // ready, running, over
 // let timeoutInterval = 180;
 
 
@@ -164,35 +166,49 @@ function updateStateOfGame() {
         nextHeadOfSnake.x++;
     }
 
-        // .push adds the next head to the end of the existing array
-        // placing this here because regardless of whether or not the
-        // snake eats the food source, we always need to push the next head
-        // of the snake on top of the current head
-    snake.push(nextHeadOfSnake)
+            // currently if the snake moves off the screen it keeps going
+        // so we need a way to prevent that and end the game if the snake
+        // touches the border wall of the game
 
-        // At the moment when the snake goes after the food source, nothing happens
-        // we want the snake to grow by one cell everytime it encounters the position
-        // where the food currently is
-
-        // then we want the position of the food source to change to somewhere else on the grid
-        // if the next head of the snake is the same position as the food source
-        // then we know the snake is eating the food
-
-        // but we only want to remove the first element  of the snake array if we are eating the food source
-        // so we'll add an else statement
-
-    if(nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
-        // eating the food increases the score by one
-        score++
-
-        // move the food after the snake eats it
-        relocateFood();
-
+    if (nextHeadOfSnake.x >= width) {
+        
+        // then the game should end
+        gameState = "over"
+        
     } else {
+
+            // .push adds the next head to the end of the existing array
+            // placing this here because regardless of whether or not the
+            // snake eats the food source, we always need to push the next head
+            // of the snake on top of the current head
+        
+        snake.push(nextHeadOfSnake);
+
+            // At the moment when the snake goes after the food source, nothing happens
+            // we want the snake to grow by one cell everytime it encounters the position
+            // where the food currently is
+
+            // then we want the position of the food source to change to somewhere else on the grid
+            // if the next head of the snake is the same position as the food source
+            // then we know the snake is eating the food
+
+            // but we only want to remove the first element  of the snake array if we are eating the food source
+            // so we'll add an else statement
+
+        if(nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
+            
+                // eating the food increases the score by one
+            score++
+
+                // move the food after the snake eats it
+            relocateFood();
+        
+        } else {
             //.shift removes the first element of the existing snake array
-        snake.shift()
+            snake.shift();
+        }
     }
-   
+
 }
 // function to redraw based on user input
 function redrawUserInterface(){
@@ -256,7 +272,6 @@ function relocateFood() {
         relocateFood()
     }
 
-
 }
 
 
@@ -272,7 +287,8 @@ onkeydown = (function(keyboardEvent) {
 
     // This just prints the keyboard code strings for each press
     console.log(code)
-    if(code === "Space")  {
+
+    if(code === "Space" && gameState === "running")  {
         
         // move the snake when "Space" === code by 
         // invoking the function slither
