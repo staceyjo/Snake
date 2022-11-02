@@ -176,9 +176,11 @@ function updateStateOfGame() {
 
         // similarly, the next thing we want to account for is if the next head
         // of the next is the width of the borad OR less than 0 to account for if the
-        // snake tries to run into the wall going left
+        // snake tries to run into the wall going left x < 0 OR if the snake
+        // tries to go outside the full height of the board OR less than 0 y axisx
 
-    if (nextHeadOfSnake.x >= width || nextHeadOfSnake.x < 0) {
+    if (nextHeadOfSnake.x >= width || nextHeadOfSnake.x < 0 ||
+        nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0) {
         
         // then the game should end
         gameState = "over"
