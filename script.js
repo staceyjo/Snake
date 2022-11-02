@@ -10,7 +10,9 @@
 const width = 12;
 const height = 12;
 const gameboard = document.querySelector("#gameboard");
+const scoreSpan = document.querySelector("#score-span");
 // gameboard.innerHTML = "<div></div>".repeat(width * height);
+
 
 
 // Making certain squares change color to represent the snake and the food
@@ -33,18 +35,33 @@ const gameboard = document.querySelector("#gameboard");
 let x = 4
 let y = 4
 
+// defining our snake variable
 let snake = [
     // we need to have multiple objects each with x and y properties
     // if we change all the y values to 4, it will move the snake to the 5th row
     // if we change the x values to 3, 4, 5 it will occupy the 4th,5th and 6th column
-    {x:0, y:4},
-    {x:1, y:4},
-    {x:2, y:4}, // head of snake
+    {x:3, y:4},
+    {x:4, y:4},
+    {x:5, y:4}, // head of snake
 ]
+
+// defining the direction of the snake, by default we are setting snake to move to the right
+let direction = "right";
+// let previousDirection = "";
+// let apple;
+// let score = 0;
+// let gameState = "ready"; // ready, running, over
+// let timeoutInterval = 180;
+
+// relocateApple();
 
 // Calling function when you first load the page to redraw (based on user input)
 redrawUserInput()
 
+// function start() {
+//     gameState = "running";
+//     setTimeout(step, timeoutInterval);
+// }
 
 // to draw the snake, we need to loop through the snake array and draw each cell individually
 // to do that we use a for each loop
@@ -60,29 +77,68 @@ redrawUserInput()
 // of the game and redraw the snake based on the user input
 
 function slither() {
-    // update the state of the game
+        // update the state of the game by updating the contents of the snake array
     updateStateOfGame()
 
-    // redraw based on user input
+        // redraw based on user input
+        // the last object in the snake array is going to be the head of the snake
     redrawUserInput()
-    
-    // the last object in the snake array is going to be the head of the snake
 
+        // schedule step if game is still runnning
+//     if(gameState === "running") {
+//         setTimeout(step, timeoutInterval);
+//   }
+    
 }
 
 // function to update the state of the game everytime the snake moves by 1 cell at a time
+// by updating the contents of the snake array
 function updateStateOfGame() {
+    // previousDirection = direction;
 
-    // current head is the last element in the snake array
-    // we get that by getting the index of snake.length
-    // and subtracting 1
+        // current head is the last element in the snake array
+        // we get that by getting the index of snake.length
+        // and subtracting 1
     let currentHeadOfSnake = snake[snake.length - 1];
 
-    let nextHeadOfSnake =  {
-        x: currentHeadOfSnake.x +1,
-        y: currentHeadOfSnake.y
+        // let nextHeadOfSnake =  {
+        //     x: currentHeadOfSnake.x +1,
+        //     y: currentHeadOfSnake.y
+        // }
 
+        // update the update state function to reflect new change in directions
+    let nextHeadOfSnake =  {
+        
+        x: currentHeadOfSnake.x,
+        y: currentHeadOfSnake.y
+    };
+
+        // these if statements deal with the change in direction for up, down, right and left:
+        
+        // for up we decrement the y value
+        // because if the snake is traveling up, the y yalue is heading towards zero
+    if(direction === "up") {
+        nextHeadOfSnake.y--;
     }
+
+        // for down we incrememnt the y value
+        // because if the snake is traveling down, the y yalue is heading away from zero
+    if(direction === "down") {
+        nextHeadOfSnake.y++;
+    }
+
+        // for left we decrement the y value
+        // because if the snake is traveling left, the x yalue is heading towards zero
+    if(direction === "left") {
+        nextHeadOfSnake.x--;
+    }
+
+        // for right we incrememnt the y value
+        // because if the snake is traveling right, the x yalue is heading away from zero
+    if(direction === "right") {
+        nextHeadOfSnake.x++;
+    }
+
 
     // .push adds the next head to the end of the existing array
     snake.push(nextHeadOfSnake)
@@ -111,16 +167,36 @@ function redrawUserInput(){
 // when you open the console, you can see everytime you press the any key
 // each key has a code, "Space", "ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown", "Enter", "Escape"
 onkeydown = (function(keyboardEvent) {
-    console.log(keyboardEvent);
+    // console.log(keyboardEvent);
 
     // Moving the snake when "Space" keyboard event takes place
     let code = keyboardEvent.code;
+    // This just prints tye keyboard code
+    console.log(code)
     if(code === "Space")  {
         
         // move the snake when "Space" === code by 
         // invoking the function slither
     slither()
-    
     }
+
+    if(code === "ArrowUp") {
+        direction = "up";
+    }
+
+    if(code === "ArrowDown") {
+        direction = "down";
+    }
+
+    if(code === "ArrowLeft") {
+        direction = "left";
+    }
+
+    if(code === "ArrowRight") {
+        direction = "right";
+    }
+
+    // update the update state function to reflect new change in directions
+
 })
 
