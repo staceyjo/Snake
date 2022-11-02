@@ -1,104 +1,117 @@
-// Creating a gameboard object I can manipulate
-// so I don't have to create 144 divs within the gameboard
-// This wasn't working at first. 
-// Make sure you add width and height if you do this again
-// Altering the repeat to width * height will automatically change
-// the number of times it repeats if you ever decide to change from 12 x 12
-// but be sure to change the numbers in  your style sheet as well
+    // Creating a gameboard object I can manipulate
+    // so I don't have to create 144 divs within the gameboard
+    // This wasn't working at first. 
+    // Make sure you add width and height if you do this again
+    // Altering the repeat to width * height will automatically change
+    // the number of times it repeats if you ever decide to change from 12 x 12
+    // but be sure to change the numbers in  your style sheet as well
 const width = 12;
 const height = 12;
 const gameboard = document.querySelector("#gameboard");
-// this will repeat our div cells within the gamboard
-// gameboard.innerHTML = "<div></div>".repeat(width * height);
+    // this will repeat our div cells within the gamboard
+    // gameboard.innerHTML = "<div></div>".repeat(width * height);
 
 
-// we need a way to grab hold of the score and change its content
+    // we need a way to grab hold of the score and change its content
 const scoreSpan = document.querySelector("#score-span");
 
-// let popup = document.querySelector(".popup"); 
-// let playAgain = document.querySelector(".playAgain");
-// let left = document.querySelector(".left") 
-// let bottom = document.querySelector(".bottom") 
-// let right = document.querySelector(".right") 
-// let up = document.querySelector(".top") 
+    // let popup = document.querySelector(".popup"); 
+    // let playAgain = document.querySelector(".playAgain");
+    // let left = document.querySelector(".left") 
+    // let bottom = document.querySelector(".bottom") 
+    // let right = document.querySelector(".right") 
+    // let up = document.querySelector(".top") 
 
-// playAgain.addEventListener("click", replay);
+    // playAgain.addEventListener("click", replay);
 
 
 
-// Making certain squares change color to represent the snake and the food
-// gameboard.children will give me all of the divs on the board
-//.classList.add() will add a new class to the gameboard
+    // Making certain squares change color to represent the snake and the food
+    // gameboard.children will give me all of the divs on the board
+    //.classList.add() will add a new class to the gameboard
 
-// if you wanted snake to appear in the first cell
-// gameboard.children[0].classList.add("snake")
+    // if you wanted snake to appear in the first cell
+    // gameboard.children[0].classList.add("snake")
 
-// if you wanted snake to appear in the last cell
-// gameboard.children[143].classList.add("snake")
+    // if you wanted snake to appear in the last cell
+    // gameboard.children[143].classList.add("snake")
 
-// if you wanted snake to appear in the 5th cell, 5th row
-// let x = 4
-// let y = 4
-// gameboard.children[ (width * y) + x].classList.add("snake")
+    // if you wanted snake to appear in the 5th cell, 5th row
+    // let x = 4
+    // let y = 4
+    // gameboard.children[ (width * y) + x].classList.add("snake")
 
-// Now we want to represent a snake on the grid at any point in time
-// we need an x value and a y value for each cell that the snake is on
-// let x = 4
-// let y = 4
+    // Now we want to represent a snake on the grid at any point in time
+    // we need an x value and a y value for each cell that the snake is on
+    // let x = 4
+    // let y = 4
 
-// defining our snake variable
+    // defining our snake variable and setting the initial position of the snake
 let snake = [
-    // we need to have multiple objects each with x and y properties
-    // if we change all the y values to 4, it will move the snake to the 5th row
-    // if we change the x values to 3, 4, 5 it will occupy the 4th,5th and 6th column
+        // we need to have multiple objects each with x and y properties
+        // if we change all the y values to 4, it will move the snake to the 5th row
+        // if we change the x values to 3, 4, 5 it will occupy the 4th,5th and 6th column
     {x:3, y:4},
     {x:4, y:4},
     {x:5, y:4}, // head of snake
 ]
 
-// defining the direction of the snake, by default we are setting snake to move to the right
+    // defining the direction of the snake, by default we are setting snake to move to the right
 let direction = "right";
 
-// At the moment, the snake con move back on itself when changing directions from left to right
-// or up to down---we don't want it to be able to do this...
-// So we need a way to track the previous direction
+    // At the moment, the snake can move back on itself when changing directions
+    // ---we don't want it to be able to do this...
+    // So we need a way to track the previous direction
 let previousDirection = "";
 
-// New variable to have the snake eat food target and grow longer with each food item
-// we'll need to add this to the redraw 
+    // New variable for food target. 
+    // Eventually once the snake eats the food we want the snake to grow longer 
+    // each time it eats food
 let food;
     // right now, nothing is keeping track of our score, so we need to add a variable 
     // that keeps track of the score everytime the snake eats an apple
 let score = 0;
 
     // need a way to end the game
-let gameState = "running"; // ready, running, over
-// let timeoutInterval = 180;
+let gameState = "ready"; // ready, running, over is start, playing, end
+
+    // defining the timeoutInterval to later use in updateStateOfGame function
+
+    // ?? why is snake moving so fast?
+    // this is supposed to gradually decrease by 10% each time the snake eats
+let timeoutInterval = 300;
 
 
-// Calling this here places the food at a random location  whenever page is loaded
+    // Calling this here places the food at a random location  whenever page is loaded
 relocateFood();
 
-// Calling function when you first load the page to redraw the user interface
-redrawUserInterface()
+    // Calling function when you first load the page to redraw the user interface
+redrawUserInterface();
 
-// function start() {
-//     gameState = "running";
-//     setTimeout(step, timeoutInterval);
-// }
+// Defining the start function
+function start() {
 
-// to draw the snake, we need to loop through the snake array and draw each cell individually
-// to do that we use a for each loop
-// snake.forEach(function(cell) {
-//     let x = cell.x;
-//     let y = cell.y;
-//     gameboard.children[(width * y) + x].classList.add("snake");
-// })
+    // at start, change the game state from ready to running to start the game
+    gameState = "running";
 
-// to get the snake to move by pressing the spacebar:
+        // The global setTimeout() method sets a timer which executes 
+        // a function or specified piece of code once the timer expires
+        // the slither function will be called after 300 milliseconds
+    setTimeout(slither, timeoutInterval)
+}
 
-// first we need a function that will update the state
-// of the game and redraw the snake for the user interface
+    // to draw the snake, we need to loop through the snake array and draw each cell individually
+    // to do that we use a for each loop
+    // snake.forEach(function(cell) {
+    //     let x = cell.x;
+    //     let y = cell.y;
+    //     gameboard.children[(width * y) + x].classList.add("snake");
+    // })
+
+    // to get the snake to move by pressing the spacebar:
+
+    // first we need a function that will update the state
+    // of the game and redraw the snake for the user interface
 
 function slither() {
         // update the state of the game by updating the contents of the snake array
@@ -108,15 +121,15 @@ function slither() {
         // the last object in the snake array is going to be the head of the snake
     redrawUserInterface()
 
-        // schedule step if game is still runnning
-//     if(gameState === "running") {
-//         setTimeout(step, timeoutInterval);
-//   }
+        // schedule slither if game is still runnning
+    if(gameState === "running") {
+        setTimeout(slither, timeoutInterval);
+    }
     
 }
 
-// function to update the state of the game everytime the snake moves by 1 cell at a time
-// by updating the contents of the snake array
+    // function to update the state of the game everytime the snake moves by 1 cell at a time
+    // by updating the contents of the snake array
 function updateStateOfGame() {
 
         // setting the previous direction to the direction that was set 
@@ -187,10 +200,9 @@ function updateStateOfGame() {
 
     if (nextHeadOfSnake.x >= width || nextHeadOfSnake.x < 0 ||
         nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0 ||
-        snake.some(cell => cell.x === nextHeadOfSnake.x 
-        && cell.y === nextHeadOfSnake.y)) {
+        snake.some(cell => cell.x === nextHeadOfSnake.x && cell.y === nextHeadOfSnake.y)) {
         
-        // then the game should end
+            // then the game should end
         gameState = "over"
 
     } else {
@@ -220,18 +232,24 @@ function updateStateOfGame() {
 
                 // move the food after the snake eats it
             relocateFood();
+            
+                // to make the game challenging, we'll shorten 
+                // the time interval by 10% each time the snake eats food
+                // by setting the timeout to be 90% by multiplying the 
+                // timeout interval by 0.9
+            timeoutInterval = timeoutInterval * 0.9
         
         } else {
-            //.shift removes the first element of the existing snake array
+                //.shift removes the first element of the existing snake array
             snake.shift();
         }
     }
 
 }
-// function to redraw based on user input
+    // function to redraw based on user input
 function redrawUserInterface(){
 
-    // This resets all of the divs on the gameboard
+        // This resets all of the divs on the gameboard
     gameboard.innerHTML = "<div></div>".repeat(width * height);
 
         // Draw the snake
@@ -243,17 +261,16 @@ function redrawUserInterface(){
         gameboard.children[(width * y) + x].classList.add("snake");
     })
 
-    // Drawing the food
-    // Adding a new section to the redraw user interface to show our food. 
-    // Want the snake to eat the food and grow in length by one cell each time
-    // so instead of using the x and y coordinates from the snake
-    // we use food.x and food.y
+        // Drawing the food
+        // Adding a new section to the redraw user interface to show our food. 
+        // Want the snake to eat the food and grow in length by one cell each time
+        // so instead of using the x and y coordinates from the snake
+        // we use food.x and food.y
 
     gameboard.children[(width * food.y) + food.x].classList.add("food");
 
-    // Update the score
+        // Update the score
     scoreSpan.textContent = score;
-
 }
 
 // Function to move the food after the snake eats it
@@ -273,7 +290,7 @@ function relocateFood() {
 
     food = {
         x: Math.floor(Math.random() * width),
-        y: Math.floor(Math.random() * width)
+        y: Math.floor(Math.random() * height)
     };
 
         // Issue I'm running into is the food lands on top of 
@@ -283,40 +300,51 @@ function relocateFood() {
         // to check if the snake location and the relocated food share the
         // intercept. using .some() method
     if(snake.some(cell => cell.x === food.x && cell.y === food.y)) {
-        // if this is true, relocate the food
-        // calling the function on itself now makes this a recursive function
-        // it will keep running the function until it finds a location where the snake is
-        // not located
+            // if this is true, relocate the food
+            // calling the function on itself now makes this a recursive function
+            // it will keep running the function until it finds a location where the snake is
+            // not located
         relocateFood()
     }
 
 }
 
 
-// onkeydown function is used when you press on a key, i.e the spacebar
-// keyboardEvent is the object
-// when you open the console, you can see everytime you press the any key
-// each key has a code, "Space", "ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown", "Enter", "Escape"
+    // onkeydown function is used when you press on a key, i.e the spacebar
+    // keyboardEvent is the object
+    // when you open the console, you can see everytime you press the any key
+    // each key has a code, "Space", "ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown", "Enter", "Escape"
 onkeydown = (function(keyboardEvent) {
-    // console.log(keyboardEvent);
+        // console.log(keyboardEvent);
 
-    // Moving the snake when "Space" keyboard event takes place
+        // Moving the snake when "Space" keyboard event takes place
     let code = keyboardEvent.code;
 
-    // This just prints the keyboard code strings for each press
+        // This just prints the keyboard code strings for each press
     console.log(code)
 
-    if(code === "Space" && gameState === "running")  {
+        // // This triggers the game to start when the spacebar is pressed
+    // if(code === "Space" && gameState === "running")  {
+        
+
+        // This triggers game to start if any key is pressed
+
+        // ******PROBLEM:is if game ends by snake running into a wall- a new game should start
+        // now it continues the previous game and keeps adding the points
+    if(gameState === "ready") {
+
+        // invoking start function to start the game if gameState if ready
+        start();
         
         // move the snake when "Space" === code by 
         // invoking the function slither
-    slither()
+    // slither()
     }
 
-    // This allows the snake to move directions
-    // adding the previousdirection in the opposite so the snake cannot
-    // fold back on itself by only moving in a direction that is not the
-    // complete opposite of the previous direction
+        // This allows the snake to move directions
+        // adding the previousdirection in the opposite so the snake cannot
+        // fold back on itself by only moving in a direction that is not the
+        // complete opposite of the previous direction
     if(code === "ArrowUp" && previousDirection !== "down") {
         direction = "up";
     }
