@@ -130,6 +130,7 @@ function slither() {
 
     // function to update the state of the game everytime the snake moves by 1 cell at a time
     // by updating the contents of the snake array
+    // calculates the next head of the snake based on the current head of the snake
 function updateStateOfGame() {
 
         // setting the previous direction to the direction that was set 
@@ -275,9 +276,10 @@ function redrawUserInterface(){
 
 // Function to move the food after the snake eats it
 // Need to generate a new location for the food variable
-// after the snake shares the same position of where it was
+// and check whether or not the snake shares the same position of where it was
 // to find the new position, we can use Math.random to find a
 // random number between and 11
+// and set a condition as an if statement to avoid the snake's position
 function relocateFood() {
         //generate random number bewtween 0 and 1
         // Math.random()
@@ -310,6 +312,7 @@ function relocateFood() {
 }
 
 
+    // Initial game kick off happens in the onkeydown function
     // onkeydown function is used when you press on a key, i.e the spacebar
     // keyboardEvent is the object
     // when you open the console, you can see everytime you press the any key
@@ -329,8 +332,6 @@ onkeydown = (function(keyboardEvent) {
 
         // This triggers game to start if any key is pressed
 
-        // ******PROBLEM:is if game ends by snake running into a wall- a new game should start
-        // now it continues the previous game and keeps adding the points
     if(gameState === "ready") {
 
         // invoking start function to start the game if gameState if ready
