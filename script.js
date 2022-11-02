@@ -62,7 +62,7 @@ let previousDirection = "";
 
 // New variable to have the snake eat food target and grow longer with each food item
 // we'll need to add this to the redraw 
-let apple = {
+let food = {
     x: 2,
     y: 2,
 };
@@ -183,6 +183,11 @@ function redrawUserInterface(){
 
     // Adding a new section to the redraw user interface function 
     // to show our food. Want the snake to eat the food and grow in length
+    // so instead of using the x and y coordinates from the snake
+    // we use food.x and food.y
+
+
+    gameboard.children[(width * food.y) + food.x].classList.add("food");
 
 }
 
