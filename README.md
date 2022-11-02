@@ -7,7 +7,7 @@ README.md file overview:
 2. The approach taken
 
 3. A link to your live site
-https://staceyjo.github.io/Snake/
+https://staceyjo.github.io/snake/
 
 4. installation instructions
 
