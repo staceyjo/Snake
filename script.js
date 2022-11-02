@@ -8,8 +8,12 @@
 const width = 12;
 const height = 12;
 const gameboard = document.querySelector("#gameboard");
-const scoreSpan = document.querySelector("#score-span");
+// this will repeat our div cells within the gamboard
 // gameboard.innerHTML = "<div></div>".repeat(width * height);
+
+
+// we need a way to grab hold of the score and change its content
+const scoreSpan = document.querySelector("#score-span");
 
 // let popup = document.querySelector(".popup"); 
 // let playAgain = document.querySelector(".playAgain");
@@ -66,7 +70,9 @@ let food = {
     x: 2,
     y: 2
 };
-// let score = 0;
+    // right now, nothing is keeping track of our score, so we need to add a variable 
+    // that keeps track of the score everytime the snake eats an apple
+let score = 0;
 // let gameState = "ready"; // ready, running, over
 // let timeoutInterval = 180;
 
@@ -177,7 +183,10 @@ function updateStateOfGame() {
         // so we'll add an else statement
 
     if(nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
-        // eating the apple
+        // eating the food increases the score by one
+        score++
+
+        // move the food after the snake eats it
 
     } else {
             //.shift removes the first element of the existing snake array
@@ -191,6 +200,7 @@ function redrawUserInterface(){
     // This resets all of the divs on the gameboard
     gameboard.innerHTML = "<div></div>".repeat(width * height);
 
+        // Draw the snake
         // to draw the snake on grid, we need to loop through the snake array and draw each cell individually
         // to do that we use a for each loop
     snake.forEach(function(cell) {
@@ -206,6 +216,11 @@ function redrawUserInterface(){
     // we use food.x and food.y
 
     gameboard.children[(width * food.y) + food.x].classList.add("food");
+
+    // Update the score
+    scoreSpan.textContent = score;
+
+
 
 }
 
