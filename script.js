@@ -187,6 +187,7 @@ function updateStateOfGame() {
         score++
 
         // move the food after the snake eats it
+        relocateFood();
 
     } else {
             //.shift removes the first element of the existing snake array
@@ -220,8 +221,26 @@ function redrawUserInterface(){
     // Update the score
     scoreSpan.textContent = score;
 
+}
 
+// Function to move the food after the snake eats it
+// Need to generate a new location for the food variable
+// after the snake shares the same position of where it was
+// to find the new position, we can use Math.random to find a
+// random number between and 11
+function relocateFood() {
+    food = {
+        x: Math.floor(Math.random() * width),
+        y: Math.floor(Math.random() * width)
+    };
+    //generate random number bewtween 0 and 1
+    // Math.random()
 
+    //remove decimal places
+    // Math.floor()
+
+    // generates random number between 0 and 11 (width is 12)
+    // Math.floor(Math.random() * width)
 }
 
 
