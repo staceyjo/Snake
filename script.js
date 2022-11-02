@@ -166,15 +166,23 @@ function updateStateOfGame() {
         nextHeadOfSnake.x++;
     }
 
-            // currently if the snake moves off the screen it keeps going
+        // Conditions to end the game if the snake tries to manuever off the board
+        // currently if the snake moves off the screen it keeps going
         // so we need a way to prevent that and end the game if the snake
         // touches the border wall of the game
 
-    if (nextHeadOfSnake.x >= width) {
+        // the first part of the if statement checks if the next head of the snake 
+        // if less than the entire width of the game board
+
+        // similarly, the next thing we want to account for is if the next head
+        // of the next is the width of the borad OR less than 0 to account for if the
+        // snake tries to run into the wall going left
+
+    if (nextHeadOfSnake.x >= width || nextHeadOfSnake.x < 0) {
         
         // then the game should end
         gameState = "over"
-        
+
     } else {
 
             // .push adds the next head to the end of the existing array
