@@ -177,10 +177,18 @@ function updateStateOfGame() {
         // similarly, the next thing we want to account for is if the next head
         // of the next is the width of the borad OR less than 0 to account for if the
         // snake tries to run into the wall going left x < 0 OR if the snake
-        // tries to go outside the full height of the board OR less than 0 y axisx
+        // tries to go outside the full height of the board OR less than 0 y axis
+
+        // the last part of the if statement needs to account for the 
+        // snake running into itself- if this happend we want the game to end
+        // this is going to be very similar to how we relocated the food to not 
+        // be in the same position as the snake so we're going to check to see if any cell
+        // of the snake matches the next head of the snake using snake.some(cell)
 
     if (nextHeadOfSnake.x >= width || nextHeadOfSnake.x < 0 ||
-        nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0) {
+        nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0 ||
+        snake.some(cell => cell.x === nextHeadOfSnake.x 
+        && cell.y === nextHeadOfSnake.y)) {
         
         // then the game should end
         gameState = "over"
