@@ -99,6 +99,7 @@ h1 {
     background-color: orangered;
 
     /* The border around the food element scales with the size of the page */
-    border: .25vmin;
+    /* border: .25vmin; */
     border-color: black;
+    border-radius: 50%;;
 }
