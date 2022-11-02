@@ -32,8 +32,8 @@ const scoreSpan = document.querySelector("#score-span");
 
 // Now we want to represent a snake on the grid at any point in time
 // we need an x value and a y value for each cell that the snake is on
-let x = 4
-let y = 4
+// let x = 4
+// let y = 4
 
 // defining our snake variable
 let snake = [
@@ -47,7 +47,11 @@ let snake = [
 
 // defining the direction of the snake, by default we are setting snake to move to the right
 let direction = "right";
-// let previousDirection = "";
+
+// At the moment, the snake con move back on itself when changing directions from left to right
+// or up to down---we don't want it to be able to do this...
+// So we need a way to track the previous direction
+let previousDirection = "";
 // let apple;
 // let score = 0;
 // let gameState = "ready"; // ready, running, over
@@ -94,7 +98,11 @@ function slither() {
 // function to update the state of the game everytime the snake moves by 1 cell at a time
 // by updating the contents of the snake array
 function updateStateOfGame() {
-    // previousDirection = direction;
+
+        // setting the previous direction to the direction that was set 
+        // so we can use the variable later in the slither function to not
+        // allow the snake to perform a 180 and change/turn on itself
+    previousDirection = direction;
 
         // current head is the last element in the snake array
         // we get that by getting the index of snake.length
@@ -180,19 +188,22 @@ onkeydown = (function(keyboardEvent) {
     slither()
     }
 
-    if(code === "ArrowUp") {
+    // This allows the snake to move directions
+    // adding the previousdirection in the opposite so the snake cannot
+    // fold back on itself
+    if(code === "ArrowUp" && previousDirection !== "down") {
         direction = "up";
     }
 
-    if(code === "ArrowDown") {
+    if(code === "ArrowDown" && previousDirection !== "up") {
         direction = "down";
     }
 
-    if(code === "ArrowLeft") {
+    if(code === "ArrowLeft" && previousDirection !== "right") {
         direction = "left";
     }
 
-    if(code === "ArrowRight") {
+    if(code === "ArrowRight" && previousDirection !== "left") {
         direction = "right";
     }
 
