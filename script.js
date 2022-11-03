@@ -270,7 +270,7 @@ function redrawUserInterface() {
 
     // image of food
     let foodImg = document.createElement("img");
-    let appleImg = document.createElement("img");
+    let appleImg = document.createElement("img2");
 
     foodImg.className = "food";
     appleImg.className = "apple";
@@ -282,7 +282,7 @@ function redrawUserInterface() {
     // so instead of using the x and y coordinates from the snake
     // we use food.x and food.y
 
-    board.children[ (width * apple.y) + apple.x].appendChild(appleImg);
+    gameboard.children[ (width * apple.y) + apple.x].appendChild(appleImg);
 
     gameboard.children[(width * food.y) + food.x].appendChild(foodImg);
 
