@@ -19,9 +19,6 @@ const scoreSpan = document.querySelector("#score-span-one");
 // when used as part of the updateStateOfGame function
 const hueChange = Math.floor(Math.random() * 360);
 
-// Making certain squares change color to represent the snake and the food
-// gameboard.children will give me all of the divs on the board
-//.classList.add() will add a new class to the gameboard
 
 // if you wanted snake to appear in the first cell
 // gameboard.children[0].classList.add("snake")
@@ -253,18 +250,27 @@ function redrawUserInterface() {
         let x = cell.x;
         let y = cell.y;
 
-        // creating new inner div for snake to then alter the appearance
+
+        // The children of the gameboard is the snake array
+            // creating new inner div for snake class to then alter the appearance
         let innerDiv = document.createElement("div");
         innerDiv.className = "snake";
 
-        // changing the color values of the snake
+            // changing the color values of the snake - works with the hueChange variable
+            // at the top to randomize the colors
         let hue = hueChange + (index * 27)
 
-        // https://convertingcolors.com/rgb-color-60_65_70.html
-
+                // https://convertingcolors.com/rgb-color-60_65_70.html
+        
         innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 71%)`;
+
+        // this gradually makes the snake smaller at the end
         let margin = Math.min((snake.length - index) * 2, 32);
-        innerDiv.style.margin = `${margin}%`
+        innerDiv.style.margin = `${margin}%`    
+
+        // gameboard.children will give me all of the divs on the board
+        //.classList.add() will add a new class to the gameboard
+        //.appendChild will add the new innerdiv as the snake grows
 
 
         gameboard.children[(width * y) + x].appendChild(innerDiv)
