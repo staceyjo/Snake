@@ -52,6 +52,7 @@ let snake = [
     {x:3, y:4},
     {x:4, y:4},
     {x:5, y:4}, // head of snake
+
 ]
     // defining the direction of the snake, by default we are setting snake to move to the right
 let direction = "right";
@@ -246,7 +247,7 @@ function redrawUserInterface(){
         // This resets all of the divs on the gameboard
     gameboard.innerHTML = "<div></div>".repeat(width * height);
 
-        // Draw the snake
+        // Draw the snake    
         // to draw the snake on grid, we need to loop through the snake array and draw each cell individually
         // to do that we use a for each loop
     snake.forEach(function(cell) {
@@ -257,11 +258,18 @@ function redrawUserInterface(){
 
         // Drawing the food
         // Adding a new section to the redraw user interface to show our food. 
+
+        // image of food
+    let foodImg = document.createElement("img");
+    foodImg.className = "food";
+    foodImg.src = "/images/cute-rat-vector-26568386.png";
+
         // Want the snake to eat the food and grow in length by one cell each time
         // so instead of using the x and y coordinates from the snake
         // we use food.x and food.y
 
-    gameboard.children[(width * food.y) + food.x].classList.add("food");
+
+    gameboard.children[(width * food.y) + food.x].appendChild(foodImg);
 
         // Update the score
     scoreSpan.textContent = score;
