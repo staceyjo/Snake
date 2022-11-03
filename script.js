@@ -59,6 +59,7 @@ let previousDirection = "";
 // Eventually once the snake eats the food we want the snake to grow longer 
 // each time it eats food
 let food;
+
 let apple;
 // right now, nothing is keeping track of our score, so we need to add a variable 
 // that keeps track of the score everytime the snake eats an apple
@@ -215,7 +216,8 @@ function updateStateOfGame() {
         // but we only want to remove the first element  of the snake array if we are eating the food source
         // so we'll add an else statement
 
-        if (nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
+        // if (nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
+        if(nextHeadOfSnake.x === apple.x && nextHeadOfSnake.y === apple.y) {
 
             // eating the food increases the score by one
             score++
