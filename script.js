@@ -328,7 +328,10 @@ function relocateFood() {
     // that shouldn't happen. So to prevent that we need
     // to check if the snake location and the relocated food share the
     // intercept. using .some() method
-    if (snake.some(cell => cell.x === food.x && cell.y === food.y)) {
+
+    // if (snake.some(cell => cell.x === food.x && cell.y === food.y)) {
+    if (snake.some(cell => cell.x === apple.x && cell.y === apple.y)) {
+
         // if this is true, relocate the food
         // calling the function on itself now makes this a recursive function
         // it will keep running the function until it finds a location where the snake is
