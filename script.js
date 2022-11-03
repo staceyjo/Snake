@@ -80,7 +80,7 @@ relocateFood();
 // Calling function when you first load the page to redraw the user interface
 redrawUserInterface();
 
-// Defining the start function
+// Defining the start function- when invoked the game is in play
 function start() {
 
     // at start, change the game state from ready to running to start the game
