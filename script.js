@@ -283,7 +283,6 @@ function redrawUserInterface() {
     // we use food.x and food.y
 
     gameboard.children[ (width * apple.y) + apple.x].appendChild(appleImg);
-
     gameboard.children[(width * food.y) + food.x].appendChild(foodImg);
 
     // Update the score
