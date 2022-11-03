@@ -59,6 +59,7 @@ let previousDirection = "";
 // Eventually once the snake eats the food we want the snake to grow longer 
 // each time it eats food
 let food;
+let apple;
 // right now, nothing is keeping track of our score, so we need to add a variable 
 // that keeps track of the score everytime the snake eats an apple
 let score = 0;
