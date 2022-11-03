@@ -14,7 +14,7 @@ const gameboard = document.querySelector("#gameboard");
 
 // we need a way to grab hold of the score and change its content
 const scoreSpan = document.querySelector("#score-span-one");
-const playerTwoScore = document.querySelector("#score-span-one");
+const scoreSpanTwo = document.querySelector("#score-span-two");
 
 
 const hueChange = Math.floor(Math.random() * 360);
@@ -283,8 +283,12 @@ function redrawUserInterface() {
     gameboard.children[ (width * food.y) + food.x].appendChild(foodImg);
 
 
-    // Update the score
+    // Update the score for player one
     scoreSpan.textContent = score;
+
+    // Update the score for player one
+    scoreSpanTwo.textContent = score;
+
 }
 
 // Function to move the food after the snake eats it
