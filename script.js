@@ -250,10 +250,22 @@ function redrawUserInterface(){
         // Draw the snake    
         // to draw the snake on grid, we need to loop through the snake array and draw each cell individually
         // to do that we use a for each loop
-    snake.forEach(function(cell) {
+    snake.forEach( function(cell, index) {
         let x = cell.x;
         let y = cell.y;
-        gameboard.children[(width * y) + x].classList.add("snake");
+
+        // creating new inner div for snake to then alter the appearance
+        let innerDiv = document.createElement("div");
+        innerDiv.className = "snake";
+
+        // changing the color values of the snake
+        let hue = index * 27
+        // https://convertingcolors.com/rgb-color-60_65_70.html
+        innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 71%)`;
+        innerDiv.style.margin = "10%"
+
+
+        gameboard.children[(width * y) + x].appendChild(innerDiv)
     })
 
         // Drawing the food
