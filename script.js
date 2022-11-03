@@ -49,6 +49,9 @@ let snake = [
     { x: 5, y: 4 }, // head of snake
 
 ]
+
+
+
 // defining the direction of the snake, by default we are setting snake to move to the right
 let direction = "right";
 
@@ -348,6 +351,27 @@ onkeydown = (function (keyboardEvent) {
 
     // This triggers game to start if any key is pressed
     if (gameState === "ready") {
+
+
+        // When the gamestate === ready, the game is ready to start
+        // Player 1 clicks the start button, which changes the game to 
+        // "running"- which means player 1 is currently playing the game.
+
+        // Add onclick when the player 1 clicks the start button, 
+        // then invoke the start function
+
+        // then hide player 1 start button while player 1 is playing
+        
+        // When player 1 gamestate changes to "end":
+        // Player 2 start button should appear
+
+        // Add onclick when player 2 clicks the start button
+        // hide player 1 start button
+
+        // when player 2 gamestate changes to "end"
+        // reset/New Game button should appear
+
+        // add reset / New Game button
 
         // invoking start function to start the game if gameState if ready
         start();

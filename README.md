@@ -15,6 +15,7 @@ https://staceyjo.github.io/snake/
 click on the link to play using my github pages link above
 
 5. Unsolved problems, etc:
+
 // To restart you need to refresh- but I want to create a button
 
 // currently only 1 player
