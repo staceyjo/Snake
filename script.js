@@ -14,7 +14,6 @@ const gameboard = document.querySelector("#gameboard");
 
 // we need a way to grab hold of the score and change its content
 const scoreSpan = document.querySelector("#score-span-one");
-const scoreSpanTwo = document.querySelector("#score-span-two");
 
 
 const hueChange = Math.floor(Math.random() * 360);
@@ -285,9 +284,6 @@ function redrawUserInterface() {
 
     // Update the score for player one
     scoreSpan.textContent = score;
-
-    // Update the score for player one
-    scoreSpanTwo.textContent = score;
 
 }
 
