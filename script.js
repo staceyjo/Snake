@@ -13,7 +13,9 @@ const gameboard = document.querySelector("#gameboard");
 
 
 // we need a way to grab hold of the score and change its content
-const scoreSpan = document.querySelector("#score-span");
+const scoreSpan = document.querySelector("#score-span-one");
+const playerTwoScore = document.querySelector("#score-span-one");
+
 
 const hueChange = Math.floor(Math.random() * 360);
 
@@ -272,7 +274,7 @@ function redrawUserInterface() {
       // draw image of food
     let foodImg = document.createElement("img");
     foodImg.className = "food";
-    foodImg.src = "cuterat.png";
+    foodImg.src = "apple.png";
 
         // Want the snake to eat the food and grow in length by one cell each time
         // so instead of using the x and y coordinates from the snake
