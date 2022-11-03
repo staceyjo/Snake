@@ -268,24 +268,27 @@ function redrawUserInterface() {
         gameboard.children[(width * y) + x].appendChild(innerDiv)
     })
 
-    // Drawing the food
-    // Adding a new section to the redraw user interface to show our food. 
+
+        // Drawing the food
+        // Adding a new section to the redraw user interface to show our food. 
+
+      // draw apple
+    let appleImg = document.createElement("img");
+    appleImg.className = "apple";
+    appleImg.src = "apple.png";
+    board.children[ (width * apple.y) + apple.x].appendChild(appleImg);
+
 
     // image of food
+
     // let foodImg = document.createElement("img");
-    let appleImg = document.createElement("img2");
-
     // foodImg.className = "food";
-    appleImg.className = "apple";
-
-    appleImg.src = "apple.png";
     // foodImg.src = "cuterat.png";
 
     // Want the snake to eat the food and grow in length by one cell each time
     // so instead of using the x and y coordinates from the snake
     // we use food.x and food.y
 
-    gameboard.children[ (width * apple.y) + apple.x].appendChild(appleImg);
     // gameboard.children[(width * food.y) + food.x].appendChild(foodImg);
 
     // Update the score
