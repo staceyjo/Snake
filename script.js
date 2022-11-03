@@ -15,7 +15,8 @@ const gameboard = document.querySelector("#gameboard");
 // we need a way to grab hold of the score and change its content
 const scoreSpan = document.querySelector("#score-span-one");
 
-
+// this will pick a random hue color to start when we refresh 
+// when used as part of the updateStateOfGame function
 const hueChange = Math.floor(Math.random() * 360);
 
 // Making certain squares change color to represent the snake and the food
