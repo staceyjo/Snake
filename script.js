@@ -311,10 +311,16 @@ function relocateFood() {
     // generates random number between 0 and 11 (width is 12)
     // Math.floor(Math.random() * width)
 
-    food = {
+    // food = {
+    //     x: Math.floor(Math.random() * width),
+    //     y: Math.floor(Math.random() * height)
+    // };
+
+    apple = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * height)
-    };
+      };
+    
 
     // Issue I'm running into is the food lands on top of 
     // the snake during a game start or after the snake eats the food
