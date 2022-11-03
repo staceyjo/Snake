@@ -262,7 +262,8 @@ function redrawUserInterface(){
         let hue = index * 27
         // https://convertingcolors.com/rgb-color-60_65_70.html
         innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 71%)`;
-        innerDiv.style.margin = "10%"
+        let margin = Math.min((snake.length - index) * 2, 32);
+        innerDiv.style.margin = `${margin}%`
 
 
         gameboard.children[(width * y) + x].appendChild(innerDiv)

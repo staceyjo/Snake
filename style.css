@@ -1,26 +1,39 @@
 body {
-    height: 100vh;
-    width: 100vw;
-    margin: 10px;
-    background-color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: fixed;
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+}
+
+h1 {
+    color:rgba(225,245,225,0.9);
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 6vmin
+
+}
+
+p {
+    color: #c7f0d8;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3vmin;
 }
 
 #gameboard {
-    /* Picking a green reminscent of the old nokia phone screen color */
     background-color: #A8C64E;
-    /* makes gameboard edges curved, more like a phone */
     border-radius: 5%;
-    /* IF i can figure it out- I want the game to appear inside of a large Nokia phone */
-    width: 60vmin;
-    height: 60vmin;
-
+    width: 70vmin;
+    height: 70vmin;
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
-    margin:0px;
 }
 
 /* The divs inside the game board */
@@ -45,39 +58,10 @@ body {
     flex-grow: 1;
     width: 90%;
     height: 90%;
-    /* background-color: #565656; */
     border-radius: 20%;
 }
 
 
-.heading {
-    color:rgba(225,245,225,0.9);
-    text-align: center;
-    font-size: 100 px;
-
-}
-
-.scoreDisplay {
-    color: #c7f0d8;
-    text-align: center;
-    font-size: 75px;
-}
-
-.button {
-    background: blueviolet;
-    text-align: center;
-}
-
-.begin {
-    background: #183693;
-    text-align: center;
-}
-
-
-.popup {
-    background: red;
-    text-align: center;
-}
 
 
     
