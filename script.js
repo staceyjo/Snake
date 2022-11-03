@@ -60,7 +60,6 @@ let previousDirection = "";
 // each time it eats food
 let food;
 
-let apple;
 // right now, nothing is keeping track of our score, so we need to add a variable 
 // that keeps track of the score everytime the snake eats an apple
 let score = 0;
@@ -216,9 +215,7 @@ function updateStateOfGame() {
         // but we only want to remove the first element  of the snake array if we are eating the food source
         // so we'll add an else statement
 
-        // if (nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
-        if(nextHeadOfSnake.x === apple.x && nextHeadOfSnake.y === apple.y) {
-
+        if (nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
             // eating the food increases the score by one
             score++
 
@@ -272,24 +269,17 @@ function redrawUserInterface() {
         // Drawing the food
         // Adding a new section to the redraw user interface to show our food. 
 
-      // draw apple
-    let appleImg = document.createElement("img");
-    appleImg.className = "apple";
-    appleImg.src = "apple.png";
-    board.children[ (width * apple.y) + apple.x].appendChild(appleImg);
+      // draw image of food
+    let foodImg = document.createElement("img");
+    foodImg.className = "food";
+    foodImg.src = "apple.png";
 
+        // Want the snake to eat the food and grow in length by one cell each time
+        // so instead of using the x and y coordinates from the snake
+        // we use food.x and food.y
 
-    // image of food
+    gameboard.children[ (width * food.y) + food.x].appendChild(foodImg);
 
-    // let foodImg = document.createElement("img");
-    // foodImg.className = "food";
-    // foodImg.src = "cuterat.png";
-
-    // Want the snake to eat the food and grow in length by one cell each time
-    // so instead of using the x and y coordinates from the snake
-    // we use food.x and food.y
-
-    // gameboard.children[(width * food.y) + food.x].appendChild(foodImg);
 
     // Update the score
     scoreSpan.textContent = score;
@@ -311,12 +301,8 @@ function relocateFood() {
     // generates random number between 0 and 11 (width is 12)
     // Math.floor(Math.random() * width)
 
-    // food = {
-    //     x: Math.floor(Math.random() * width),
-    //     y: Math.floor(Math.random() * height)
-    // };
 
-    apple = {
+    food = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * height)
       };
@@ -329,8 +315,7 @@ function relocateFood() {
     // to check if the snake location and the relocated food share the
     // intercept. using .some() method
 
-    // if (snake.some(cell => cell.x === food.x && cell.y === food.y)) {
-    if (snake.some(cell => cell.x === apple.x && cell.y === apple.y)) {
+    if (snake.some(cell => cell.x === food.x && cell.y === food.y)) {
 
         // if this is true, relocate the food
         // calling the function on itself now makes this a recursive function
