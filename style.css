@@ -81,8 +81,8 @@ p {
 #gameboard {
     background-color: #A8C64E;
     border-radius: 5%;
-    width: 70vmin;
-    height: 70vmin;
+    width: 65vmin;
+    height: 65vmin;
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
