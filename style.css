@@ -41,8 +41,8 @@ p {
 #playerOneStartBtn {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 3vmin;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: #C7F0ED;
     border:solid;
     border-color: blue;
     border-radius: 10%;
@@ -52,8 +52,8 @@ p {
 #resetBtn {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 3vmin;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color:#D8C7F0;
     border:solid;
     border-color: blue;
     border-radius: 10%;
@@ -63,8 +63,8 @@ p {
 #playerTwoStartBtn {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 3vmin;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: #C7F0ED;
     border:solid;
     border-color: blue;
     border-radius: 10%;
