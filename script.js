@@ -14,12 +14,27 @@ const gameboard = document.querySelector("#gameboard");
 
 // we need a way to grab hold of the score and change its content
 const scoreSpan = document.querySelector("#score-span-one");
+const scoreSpanP2 = document.querySelector("#score-span-two");
+
 
 // this will pick a random hue color to start when we refresh 
 // when used as part of the updateStateOfGame function
 const hueChange = Math.floor(Math.random() * 360);
 
+const resetBtn = document.querySelector("resetBtn");
+// right now this does nothing
+// window.addEventListener("click", resetBtn);
 
+const playerOneStartBtn = document.querySelector("playerOneStartBtn");
+// right now this does nothing
+// window.addEventListener("click", playerOneStartBtn);
+
+const playerTwoStartBtn = document.querySelector("playerTwoStartBtn");
+// right now this does nothing
+// window.addEventListener("click", playerTwoStartBtn);
+
+
+// ===================================SNAKE ARRAY =================================
 // if you wanted snake to appear in the first cell
 // gameboard.children[0].classList.add("snake")
 
@@ -37,6 +52,8 @@ const hueChange = Math.floor(Math.random() * 360);
 // let y = 4
 
 // defining our snake variable and setting the initial position of the snake
+// snake parts and position are contained inside of an array
+
 let snake = [
     // we need to have multiple objects each with x and y properties
     // if we change all the y values to 4, it will move the snake to the 5th row
@@ -75,11 +92,19 @@ let gameState = "ready"; // ready, running, over is start, playing, end
 // this is supposed to gradually decrease by 10% each time the snake eats
 let timeoutInterval = 300;
 
+// ===================================PAGE REFRESH =================================
+
+
 // Calling this here places the food at a random location  whenever page is loaded
+// before any button is pressed
+
 relocateFood();
 
 // Calling function when you first load the page to redraw the user interface
 redrawUserInterface();
+
+// ===================================START FUNCTION =================================
+
 
 // Defining the start function- when invoked the game is in play
 function start() {
@@ -105,6 +130,9 @@ function start() {
 // first we need a function that will update the state
 // of the game and redraw the snake for the user interface
 
+// ===================================SLITHER FUNCTION =================================
+
+
 function slither() {
     // update the state of the game by updating the contents of the snake array
     updateStateOfGame()
@@ -119,6 +147,14 @@ function slither() {
     }
 
 }
+
+// =======================GAME RUNNING- CHECKS CURRENT SNAKE HEAD POSITION ===============================
+// =======================GAME RUNNING- CHECKS NEXT SNAKE HEAD POSITION ==================================
+// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS POINTS ==================================
+// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS LENGTH TO SNAKE ARRAY====================
+// =======================GAME RUNNING- IF SNAKE IS EATING: RELOCATES FOOD ===============================
+// =======================GAME RUNNING- ENDS GAME IF SNAKE TOUCHES WALL OR ITSELF=========================
+
 // function to update the state of the game everytime the snake moves by 1 cell at a time
 // by updating the contents of the snake array
 // calculates the next head of the snake based on the current head of the snake
@@ -194,7 +230,10 @@ function updateStateOfGame() {
         snake.some(cell => cell.x === nextHeadOfSnake.x && cell.y === nextHeadOfSnake.y)
     ) {
 
-        // then the game should end
+        // then the game ends
+
+        // ??? wondering if here is where I add a condition to start the game for player 2
+        // like changing game state to lost for player one
         gameState = "over"
 
     } else {
@@ -237,10 +276,21 @@ function updateStateOfGame() {
     }
 
 }
-// function to redraw based on user input
+
+// =======================GAME RUNNING- REPEATS DIVS FOR CELLS FOR 12x12 GAMEBOARD ======================
+// =======================GAME RUNNING- LOOPS THROUGH SNAKE ARRAY TO DRAW SNAKE ON GAMEBOARD ============
+// =======================GAME RUNNING- CREATES INNER DIVS THAT CHANGES COLORS OF THE SNAKE =============
+// =======================GAME RUNNING- DRAWS FOOD ON THE BOARD =========================================
+// =======================GAME RUNNING- HOUSES SCORE TEXT CONTENT =======================================
+
+
+// function to redraw user interface
 function redrawUserInterface() {
 
-    // This resets all of the divs on the gameboard
+    // This repeats the single div on the gameboard
+    // that was initially set up in the html
+    // one div multiplied by width & height (12 x 12- 144 gameboard cells
+    // the snake and apple can occupy
     gameboard.innerHTML = "<div></div>".repeat(width * height);
 
     // Draw the snake    
@@ -271,8 +321,6 @@ function redrawUserInterface() {
         // gameboard.children will give me all of the divs on the board
         //.classList.add() will add a new class to the gameboard
         //.appendChild will add the new innerdiv as the snake grows
-
-
         gameboard.children[(width * y) + x].appendChild(innerDiv)
     })
 
@@ -297,6 +345,7 @@ function redrawUserInterface() {
 
 }
 
+// ================================MOVES FOOD TO POSITION WHERE SNAKE ARRAY IS NOT ============================
 // Function to move the food after the snake eats it
 // Need to generate a new location for the food variable
 // and check whether or not the snake shares the same position of where it was
@@ -337,11 +386,22 @@ function relocateFood() {
     }
 
 }
+
+// ================================ON KEY DOWN: TRIGGERS GAME START ==========================================
+// ================================ON KEY DOWN: ALLOWS SNAKE TO MOVE USING ARROWS ============================
+// ================================ON KEY DOWN: DOES NOT ALLOW SNAKE TO TURN 180 =============================
+
 // Initial game kick off happens in the onkeydown function
 // onkeydown function is used when you press on a key, i.e the spacebar
 // keyboardEvent is the object
+
 // when you open the console, you can see everytime you press the any key
 // each key has a code, "Space", "ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown", "Enter", "Escape"
+
+// right now, pressing any key changes the change state from ready
+// to start
+// ?? Change this to onclick start button ?
+
 onkeydown = (function (keyboardEvent) {
     // console.log(keyboardEvent);
 
