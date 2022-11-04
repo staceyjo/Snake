@@ -13,8 +13,8 @@ const gameboard = document.querySelector("#gameboard");
 
 
 // we need a way to grab hold of the score and change its content
-const scoreSpan = document.querySelector("#score-span-one");
-const scoreSpanP2 = document.querySelector("#score-span-two");
+let scoreSpan = document.querySelector("#score-span-one");
+// const scoreSpanP2 = document.querySelector("#score-span-two");
 
 
 // this will pick a random hue color to start when we refresh 
@@ -140,6 +140,7 @@ function slither() {
     // redraw user interface
     // the last object in the snake array is going to be the head of the snake
     redrawUserInterface()
+    
 
     // schedule slither if game is still runnning
     if (gameState === "running") {
@@ -229,12 +230,17 @@ function updateStateOfGame() {
         nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0 ||
         snake.some(cell => cell.x === nextHeadOfSnake.x && cell.y === nextHeadOfSnake.y)
     ) {
-
+        console.log("Game Over")
         // then the game ends
 
         // ??? wondering if here is where I add a condition to start the game for player 2
         // like changing game state to lost for player one
         gameState = "over"
+
+        if(gameState === "over") {
+            console.log(gameState)
+            startPlayerTwo();
+        }
 
     } else {
 
@@ -438,8 +444,6 @@ onkeydown = (function (keyboardEvent) {
     }
 
 
-
-
     // This allows the snake to move directions
     // adding the previousdirection in the opposite so the snake cannot
     // fold back on itself by only moving in a direction that is not the
@@ -463,7 +467,29 @@ onkeydown = (function (keyboardEvent) {
 })
 
 // add reset / New Game button
-resetBtn.addEventListener("click", (evt) => {
+resetBtn.addEventListener("click", () => {
     window.location.reload()
 })
 
+// 
+function startPlayerTwo() {
+    score = 0;
+    scoreSpan = document.querySelector("#score-span-two");
+
+    snake = [
+        { x: 3, y: 4 },
+        { x: 4, y: 4 },
+        { x: 5, y: 4 }, // head of snake
+    ]
+
+    direction = "right";
+    previousDirection = "";
+    timeoutInterval = 300
+    food = {
+        x: Math.floor(Math.random() * width),
+        y: Math.floor(Math.random() * height)
+    };
+
+    gameState = "ready";
+
+}
