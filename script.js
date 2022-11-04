@@ -21,15 +21,15 @@ const scoreSpanP2 = document.querySelector("#score-span-two");
 // when used as part of the updateStateOfGame function
 const hueChange = Math.floor(Math.random() * 360);
 
-const resetBtn = document.querySelector("resetBtn");
+const resetBtn = document.querySelector("#resetBtn");
 // right now this does nothing
 // window.addEventListener("click", resetBtn);
 
-const playerOneStartBtn = document.querySelector("playerOneStartBtn");
+const playerOneStartBtn = document.querySelector("#playerOneStartBtn");
 // right now this does nothing
-// window.addEventListener("click", playerOneStartBtn);
+// playerOneStartBtn.addEventListener("click", playerOneStartBtn);
 
-const playerTwoStartBtn = document.querySelector("playerTwoStartBtn");
+const playerTwoStartBtn = document.querySelector("#playerTwoStartBtn");
 // right now this does nothing
 // window.addEventListener("click", playerTwoStartBtn);
 
@@ -400,28 +400,26 @@ function relocateFood() {
 
 // right now, pressing any key changes the change state from ready
 // to start
+
 // ?? Change this to onclick start button ?
+// document.body.addEventListener("click", playerOneStartBtn)
 
 onkeydown = (function (keyboardEvent) {
     // console.log(keyboardEvent);
 
-    // Moving the snake when "Space" keyboard event takes place
     let code = keyboardEvent.code;
 
     // This just prints the keyboard code strings for each press
     console.log(code)
 
-    // // This triggers the game to start when the spacebar is pressed
-    // if(code === "Space" && gameState === "running")  {
-
-
+    // When the gamestate === ready, the game is ready to start
     // This triggers game to start if any key is pressed
     if (gameState === "ready") {
+        start();
 
-
-        // When the gamestate === ready, the game is ready to start
         // Player 1 clicks the start button, which changes the game to 
         // "running"- which means player 1 is currently playing the game.
+        // if(gameState = "ready")
 
         // Add onclick when the player 1 clicks the start button, 
         // then invoke the start function
@@ -437,15 +435,11 @@ onkeydown = (function (keyboardEvent) {
         // when player 2 gamestate changes to "end"
         // reset/New Game button should appear
 
-        // add reset / New Game button
-
-        // invoking start function to start the game if gameState if ready
-        start();
-
-        // move the snake when "Space" === code by 
-        // invoking the function slither
-        // slither()
     }
+
+
+
+
     // This allows the snake to move directions
     // adding the previousdirection in the opposite so the snake cannot
     // fold back on itself by only moving in a direction that is not the
@@ -466,5 +460,10 @@ onkeydown = (function (keyboardEvent) {
         direction = "right";
     }
 
+})
+
+// add reset / New Game button
+resetBtn.addEventListener("click", (evt) => {
+    window.location.reload()
 })
 
