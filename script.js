@@ -33,6 +33,9 @@ const playerTwoStartBtn = document.querySelector("#playerTwoStartBtn");
 // right now this does nothing
 // window.addEventListener("click", playerTwoStartBtn);
 
+// The playCount is set to zero- meaning we have not played the game yet
+let playCount = 0;
+
 
 // ===================================SNAKE ARRAY =================================
 // if you wanted snake to appear in the first cell
@@ -237,9 +240,14 @@ function updateStateOfGame() {
         // like changing game state to lost for player one
         gameState = "over"
 
+
+        // setting playcount from 0 to 1, which is basically setting up a next round for player 2
         if(gameState === "over") {
-            console.log(gameState)
-            startPlayerTwo();
+            if(playCount === 0) {
+                console.log(gameState);
+                playCount++;
+                startPlayerTwo();
+            }
         }
 
     } else {
@@ -471,7 +479,7 @@ resetBtn.addEventListener("click", () => {
     window.location.reload()
 })
 
-// 
+// this reset the game for player 2 when the playcount is incremented 
 function startPlayerTwo() {
     score = 0;
     scoreSpan = document.querySelector("#score-span-two");
@@ -491,5 +499,4 @@ function startPlayerTwo() {
     };
 
     gameState = "ready";
-
 }
