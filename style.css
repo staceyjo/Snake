@@ -26,6 +26,67 @@ p {
     font-size: 3vmin;
 }
 
+#score {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 100px;
+}
+  
+.buttons {
+    text-align: center;
+    padding-top: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+  
+#playerOneStartBtn {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 75px;
+    width: 750px;
+    height: 150px;
+    color: white;
+    background-color: black;
+    border:solid;
+    border-color: blue;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+#resetBtn {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 75px;
+    width: 300px;
+    height: 150px;
+    color: white;
+    background-color: black;
+    border:solid;
+    border-color: blue;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+#playerTwoStartBtn {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 75px;
+    width: 750px;
+    height: 150px;
+    color: white;
+    background-color: black;
+    border:solid;
+    border-color: blue;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+#gameContainer {
+    text-align: center;
+    border: 3px;
+    border:solid;
+    border: black;
+}
+  
+  
+  
+
 #gameboard {
     background-color: #A8C64E;
     border-radius: 5%;
