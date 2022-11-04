@@ -84,9 +84,6 @@ p {
     border: black;
 }
   
-  
-  
-
 #gameboard {
     background-color: #A8C64E;
     border-radius: 5%;
@@ -105,7 +102,6 @@ p {
     display: flex;
 }
 
-/* Styling the snake element */
 .snake {
     flex-grow: 1;
     border: 1px;
@@ -114,7 +110,6 @@ p {
     border-radius: 20%;
 }
 
-/* Styling the snake element */
 .food {
     flex-grow: 1;
     width: 90%;
