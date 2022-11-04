@@ -40,9 +40,7 @@ p {
   
 #playerOneStartBtn {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 75px;
-    width: 750px;
-    height: 150px;
+    font-size: 3vmin;
     color: white;
     background-color: black;
     border:solid;
@@ -53,9 +51,7 @@ p {
 
 #resetBtn {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 75px;
-    width: 300px;
-    height: 150px;
+    font-size: 3vmin;
     color: white;
     background-color: black;
     border:solid;
@@ -66,9 +62,7 @@ p {
 
 #playerTwoStartBtn {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 75px;
-    width: 750px;
-    height: 150px;
+    font-size: 3vmin;
     color: white;
     background-color: black;
     border:solid;
