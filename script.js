@@ -24,6 +24,8 @@ const resetBtn = document.querySelector("#resetBtn");
 
 const gulpSound = new Audio("gulp.mp3");
 
+const loseSound = new Audio("lose1.wav");
+
 
 // The playCount is set to zero- meaning we have not played the game yet
 let playCount = 0;
@@ -200,7 +202,7 @@ function updateStateOfGame() {
         nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0 ||
         snake.some(cell => cell.x === nextHeadOfSnake.x && cell.y === nextHeadOfSnake.y)
     ) {
-        console.log("Game Over")
+        // loseSound.play();
         // then the game ends
 
         gameState = "over"
@@ -210,6 +212,8 @@ function updateStateOfGame() {
 
         // setting playcount from 0 to 1, which is basically setting up a next round for player 2
         if(gameState === "over") {
+            loseSound.play();
+
             if(playCount === 0) {
                 console.log(gameState);
                 playCount++;
