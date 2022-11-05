@@ -3,8 +3,8 @@
 
 // If you ever decide to change from 12 x 12
 // but be sure to change the numbers in your style sheet as well
-const width = 12;
-const height = 12;
+const width = 15;
+const height = 15;
 const gameboard = document.querySelector("#gameboard");
 
 // this will repeat our div cells within the gamboard
@@ -27,6 +27,22 @@ const gulpSound = new Audio("gulp.mp3");
 const loseSound = new Audio("lose1.wav");
 
 const backgroundSound = new Audio("backgroundmusic.mp3");
+
+const foodItemsArray = [
+    '🐁',
+    '🍇',
+    '🍉',
+    '🍈',
+    '🍓',
+    '🍍',
+    '🍌',
+    '🥝',
+    '🍏',
+    '🍎',
+    '🍔',
+    '🍅',
+    '🥚',
+  ];
 
 // const alert = document.querySelector("alert")
 
