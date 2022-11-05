@@ -26,6 +26,8 @@ const gulpSound = new Audio("gulp.mp3");
 
 const loseSound = new Audio("lose1.wav");
 
+const backgroundSound = new Audio("backgroundmusic.mp3");
+
 // const alert = document.querySelector("alert")
 
 // The playCount is set to zero- meaning we have not played the game yet
@@ -92,6 +94,8 @@ function start() {
 
     // Change the game state from ready to running
     gameState = "running";
+
+    backgroundSound.play();
 
     // The global setTimeout() method sets a timer which executes 
     // a function or specified piece of code once the timer expires
