@@ -1,37 +1,27 @@
 // Creating a gameboard object I can manipulate
 // so I don't have to create 144 divs within the gameboard
-// This wasn't working at first. 
-// Make sure you add width and height if you do this again
-// Altering the repeat to width * height will automatically change
-// the number of times it repeats if you ever decide to change from 12 x 12
-// but be sure to change the numbers in  your style sheet as well
+
+// If you ever decide to change from 12 x 12
+// but be sure to change the numbers in your style sheet as well
 const width = 12;
 const height = 12;
 const gameboard = document.querySelector("#gameboard");
+
 // this will repeat our div cells within the gamboard
 // gameboard.innerHTML = "<div></div>".repeat(width * height);
 
 
 // we need a way to grab hold of the score and change its content
 let scoreSpan = document.querySelector("#score-span-one");
-// const scoreSpanP2 = document.querySelector("#score-span-two");
 
 
 // this will pick a random hue color to start when we refresh 
 // when used as part of the updateStateOfGame function
 const hueChange = Math.floor(Math.random() * 360);
 
+// reset button variable
 const resetBtn = document.querySelector("#resetBtn");
-// right now this does nothing
-// window.addEventListener("click", resetBtn);
 
-const playerOneStartBtn = document.querySelector("#playerOneStartBtn");
-// right now this does nothing
-// playerOneStartBtn.addEventListener("click", playerOneStartBtn);
-
-const playerTwoStartBtn = document.querySelector("#playerTwoStartBtn");
-// right now this does nothing
-// window.addEventListener("click", playerTwoStartBtn);
 
 // The playCount is set to zero- meaning we have not played the game yet
 let playCount = 0;
@@ -49,24 +39,15 @@ let playCount = 0;
 // let y = 4
 // gameboard.children[ (width * y) + x].classList.add("snake")
 
-// Now we want to represent a snake on the grid at any point in time
-// we need an x value and a y value for each cell that the snake is on
-// let x = 4
-// let y = 4
 
 // defining our snake variable and setting the initial position of the snake
 // snake parts and position are contained inside of an array
 
 let snake = [
-    // we need to have multiple objects each with x and y properties
-    // if we change all the y values to 4, it will move the snake to the 5th row
-    // if we change the x values to 3, 4, 5 it will occupy the 4th,5th and 6th column
     { x: 3, y: 4 },
     { x: 4, y: 4 },
     { x: 5, y: 4 }, // head of snake
-
 ]
-
 
 
 // defining the direction of the snake, by default we are setting snake to move to the right
@@ -79,27 +60,21 @@ let previousDirection = "";
 
 // New variable for food target. 
 // Eventually once the snake eats the food we want the snake to grow longer 
-// each time it eats food
 let food;
 
 // right now, nothing is keeping track of our score, so we need to add a variable 
 // that keeps track of the score everytime the snake eats an apple
 let score = 0;
 
-// need a way to end the game
+// need a way to start the game
 let gameState = "ready"; // ready, running, over is start, playing, end
 
 // defining the timeoutInterval to later use in updateStateOfGame function
-
-// ?? why is snake moving so fast?
-// this is supposed to gradually decrease by 10% each time the snake eats
 let timeoutInterval = 300;
 
-// ===================================PAGE REFRESH =================================
-
-
-// Calling this here places the food at a random location  whenever page is loaded
-// before any button is pressed
+// ===================================ON PAGE LOAD =================================
+// Calling this here places the food at a random location and redraws user interface
+// whenever page is loaded
 
 relocateFood();
 
@@ -107,12 +82,10 @@ relocateFood();
 redrawUserInterface();
 
 // ===================================START FUNCTION =================================
-
-
 // Defining the start function- when invoked the game is in play
 function start() {
 
-    // at start, change the game state from ready to running to start the game
+    // Change the game state from ready to running
     gameState = "running";
 
     // The global setTimeout() method sets a timer which executes 
@@ -120,6 +93,29 @@ function start() {
     // the slither function will be called after 300 milliseconds
     setTimeout(slither, timeoutInterval);
 }
+
+// ===================================SLITHER FUNCTION =================================
+function slither() {
+    // update the state of the game by updating the contents of the snake array
+    updateStateOfGame()
+
+    // redraw user interface
+    // the last object in the snake array is going to be the head of the snake
+    redrawUserInterface()
+
+    // schedule slither if game is still runnning
+    if (gameState === "running") {
+        setTimeout(slither, timeoutInterval);
+    }
+}
+
+// =======================GAME RUNNING- CHECKS CURRENT SNAKE HEAD POSITION ===============================
+// =======================GAME RUNNING- CHECKS NEXT SNAKE HEAD POSITION ==================================
+// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS POINTS ==================================
+// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS LENGTH TO SNAKE ARRAY====================
+// =======================GAME RUNNING- IF SNAKE IS EATING: RELOCATES FOOD ===============================
+// =======================GAME RUNNING- ENDS GAME IF SNAKE TOUCHES WALL OR ITSELF=========================
+
 // to draw the snake, we need to loop through the snake array and draw each cell individually
 // to do that we use a for each loop
 // snake.forEach(function(cell) {
@@ -133,51 +129,20 @@ function start() {
 // first we need a function that will update the state
 // of the game and redraw the snake for the user interface
 
-// ===================================SLITHER FUNCTION =================================
 
-
-function slither() {
-    // update the state of the game by updating the contents of the snake array
-    updateStateOfGame()
-
-    // redraw user interface
-    // the last object in the snake array is going to be the head of the snake
-    redrawUserInterface()
-    
-
-    // schedule slither if game is still runnning
-    if (gameState === "running") {
-        setTimeout(slither, timeoutInterval);
-    }
-
-}
-
-// =======================GAME RUNNING- CHECKS CURRENT SNAKE HEAD POSITION ===============================
-// =======================GAME RUNNING- CHECKS NEXT SNAKE HEAD POSITION ==================================
-// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS POINTS ==================================
-// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS LENGTH TO SNAKE ARRAY====================
-// =======================GAME RUNNING- IF SNAKE IS EATING: RELOCATES FOOD ===============================
-// =======================GAME RUNNING- ENDS GAME IF SNAKE TOUCHES WALL OR ITSELF=========================
-
-// function to update the state of the game everytime the snake moves by 1 cell at a time
+// function updates everytime the snake moves by 1 cell at a time
 // by updating the contents of the snake array
 // calculates the next head of the snake based on the current head of the snake
 function updateStateOfGame() {
 
-    // setting the previous direction to the direction that was set 
+    // setting the previous direction to the direction 
     // so we can use the variable later in the slither function to not
     // allow the snake to perform a 180 and change/turn on itself
     previousDirection = direction;
 
     // current head is the last element in the snake array
-    // we get that by getting the index of snake.length
-    // and subtracting 1
+    // we get that by getting the index of snake.length and subtracting 1
     let currentHeadOfSnake = snake[snake.length - 1];
-
-    // let nextHeadOfSnake =  {
-    //     x: currentHeadOfSnake.x +1,
-    //     y: currentHeadOfSnake.y
-    // }
 
     // update the update state function to reflect new head of the snake
     let nextHeadOfSnake = {
@@ -219,7 +184,7 @@ function updateStateOfGame() {
     // if less than the entire width of the game board
 
     // similarly, the next thing we want to account for is if the next head
-    // of the next is the width of the borad OR less than 0 to account for if the
+    // of the snake is the width of the borad OR less than 0 to account for if the
     // snake tries to run into the wall going left x < 0 OR if the snake
     // tries to go outside the full height of the board OR less than 0 y axis
 
@@ -236,10 +201,10 @@ function updateStateOfGame() {
         console.log("Game Over")
         // then the game ends
 
-        // ??? wondering if here is where I add a condition to start the game for player 2
-        // like changing game state to lost for player one
         gameState = "over"
 
+        // ??? wondering if here is where I add a condition to start the game for player 2
+        // like changing game state to lost for player one
 
         // setting playcount from 0 to 1, which is basically setting up a next round for player 2
         if(gameState === "over") {
@@ -361,6 +326,7 @@ function redrawUserInterface() {
 
 // ================================MOVES FOOD TO POSITION WHERE SNAKE ARRAY IS NOT ============================
 // Function to move the food after the snake eats it
+
 // Need to generate a new location for the food variable
 // and check whether or not the snake shares the same position of where it was
 // to find the new position, we can use Math.random to find a
@@ -414,9 +380,6 @@ function relocateFood() {
 
 // right now, pressing any key changes the change state from ready
 // to start
-
-// ?? Change this to onclick start button ?
-// document.body.addEventListener("click", playerOneStartBtn)
 
 onkeydown = (function (keyboardEvent) {
     // console.log(keyboardEvent);
