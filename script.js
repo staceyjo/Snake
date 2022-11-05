@@ -26,6 +26,7 @@ const gulpSound = new Audio("gulp.mp3");
 
 const loseSound = new Audio("lose1.wav");
 
+// const alert = document.querySelector("alert")
 
 // The playCount is set to zero- meaning we have not played the game yet
 let playCount = 0;
@@ -202,7 +203,6 @@ function updateStateOfGame() {
         nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0 ||
         snake.some(cell => cell.x === nextHeadOfSnake.x && cell.y === nextHeadOfSnake.y)
     ) {
-        // loseSound.play();
         // then the game ends
 
         gameState = "over"
