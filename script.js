@@ -22,6 +22,8 @@ const hueChange = Math.floor(Math.random() * 360);
 // reset button variable
 const resetBtn = document.querySelector("#resetBtn");
 
+const gulpSound = new Audio("gulp.mp3");
+
 
 // The playCount is set to zero- meaning we have not played the game yet
 let playCount = 0;
@@ -238,6 +240,9 @@ function updateStateOfGame() {
         if (nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
             // eating the food increases the score by one
             score++
+
+            // adding gulp sound when snake head is same as food 
+            gulpSound.play();
 
             // move the food after the snake eats it
             relocateFood();
