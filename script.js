@@ -1,132 +1,128 @@
-// Creating a gameboard object I can manipulate
-// so I don't have to create 144 divs within the gameboard
-
-// If you ever decide to change from 12 x 12
+// ===================================GAMEBOARD =================================
+// If you ever decide to change from 15 x 15
 // but be sure to change the numbers in your style sheet as well
 const width = 15;
 const height = 15;
 const gameboard = document.querySelector("#gameboard");
 
-// this will repeat our div cells within the gamboard
-// gameboard.innerHTML = "<div></div>".repeat(width * height);
+// ===================================GAME STATUS =================================
+// need a way to start the game
+let gameState = "ready"; // "ready" to start, "running" or currently playing, "over" is game end
+
+// ===================================GAME SPEED =================================
+// timeoutInterval set to 300 miliseconds
+// later used in updateGame function to speed up the game as player eats food
+let timeoutInterval = 300;
 
 
-// we need a way to grab hold of the score and change its content
+// ===================================PLAYER 1 SCORE =================================
+// score-span-one updates the score on the html 
+// score will track everytime the snake eats food
 let scoreSpan = document.querySelector("#score-span-one");
+let score = 0;
 
-
-// this will pick a random hue color to start when we refresh 
-// when used as part of the updateStateOfGame function
-const hueChange = Math.floor(Math.random() * 360);
-
-// reset button variable
-const resetBtn = document.querySelector("#resetBtn");
-
-const gulpSound = new Audio("gulp.mp3");
-
-const loseSound = new Audio("lose1.wav");
-
-const backgroundSound = new Audio("backgroundmusic.mp3");
-
-const foodItemsArray = [
-    '🐁',
-    '🍇',
-    '🍉',
-    '🍈',
-    '🍓',
-    '🍍',
-    '🍌',
-    '🥝',
-    '🍏',
-    '🍎',
-    '🍔',
-    '🍅',
-    '🥚',
-  ];
-
-// const alert = document.querySelector("alert")
-
-// The playCount is set to zero- meaning we have not played the game yet
+// ===================================GAME PLAY ROUND =================================
+// The playCount is the round, or each turn of the player.
+// playCount 1 is player, playCount 2 is player 2
 let playCount = 0;
 
-
 // ===================================SNAKE ARRAY =================================
+// snake parts and position are contained inside of an array
+// snake will appear in same position with each new game for each player
+// 5th row (y: 4), occupying the 4th, 5th, 6th columns (x : 3, 4, 5)
+
+let snake = [
+    { x: 3, y: 4 }, // tail of snake
+    { x: 4, y: 4 }, // body of snake
+    { x: 5, y: 4 }, // head of snake 
+]
+
+// gameboard.children[ (width * y) + x].classList.add("snake")
+
+
 // if you wanted snake to appear in the first cell
 // gameboard.children[0].classList.add("snake")
 
 // if you wanted snake to appear in the last cell
 // gameboard.children[143].classList.add("snake")
 
-// if you wanted snake to appear in the 5th cell, 5th row
-// let x = 4
-// let y = 4
-// gameboard.children[ (width * y) + x].classList.add("snake")
+
+// ===================================SNAKE COLORS =================================
+// this will pick a random hue color to start when we refresh 
+// when used as part of the updateGame function
+const hueChange = Math.floor(Math.random() * 360);
 
 
-// defining our snake variable and setting the initial position of the snake
-// snake parts and position are contained inside of an array
-
-let snake = [
-    { x: 3, y: 4 },
-    { x: 4, y: 4 },
-    { x: 5, y: 4 }, // head of snake
-]
-
-
+// ===================================SNAKE DIRECTION =================================
 // defining the direction of the snake, by default we are setting snake to move to the right
 let direction = "right";
 
-// At the moment, the snake can move back on itself when changing directions
-// ---we don't want it to be able to do this...
-// So we need a way to track the previous direction
+// Setting variable for previous direction to an empty string
+//At the moment, the snake can move back on itself when changing directions
+// will update this in a function later
 let previousDirection = "";
 
-// New variable for food target. 
-// Eventually once the snake eats the food we want the snake to grow longer 
+// ===================================FOOD =================================
+// Setting food variable, was previouly a red cell
 let food;
 
-// right now, nothing is keeping track of our score, so we need to add a variable 
-// that keeps track of the score everytime the snake eats an apple
-let score = 0;
+// Want to eventually randomize the food items
+// right now set to use image of apple
+// const foodItemsArray = [
+//     '🐁',
+//     '🍇',
+//     '🍉',
+//     '🍈',
+//     '🍓',
+//     '🍍',
+//     '🍌',
+//     '🥝',
+//     '🍏',
+//     '🍎',
+//     '🍔',
+//     '🍅',
+//     '🥚',
+//   ];
 
-// need a way to start the game
-let gameState = "ready"; // ready, running, over is start, playing, end
 
-// defining the timeoutInterval to later use in updateStateOfGame function
-let timeoutInterval = 300;
+// ===================================RESET BUTTON =================================
+const resetBtn = document.querySelector("#resetBtn");
+
+// ===================================SOUNDS =================================
+const gulpSound = new Audio("gulp.mp3");
+
+const loseSound = new Audio("lose1.wav");
+
+const backgroundSound = new Audio("backgroundmusic.mp3");
+
 
 // ===================================ON PAGE LOAD =================================
-// Calling this here places the food at a random location and redraws user interface
-// whenever page is loaded
+// Calling this here places the food at a random location and redraws game whenever page is loaded
 
 relocateFood();
 
-// Calling function when you first load the page to redraw the user interface
-redrawUserInterface();
+redrawGameBoard();
 
 // ===================================START FUNCTION =================================
-// Defining the start function- when invoked the game is in play
+// Changes the game state from "ready" to running and starts music when any key is pressed
+// The global setTimeout() method sets a timer which executes a function 
+// or specified piece of code once the timer expires
+// the slither function will be called after 300 milliseconds
+
+
 function start() {
-
-    // Change the game state from ready to running
     gameState = "running";
-
     backgroundSound.play();
-
-    // The global setTimeout() method sets a timer which executes 
-    // a function or specified piece of code once the timer expires
-    // the slither function will be called after 300 milliseconds
     setTimeout(slither, timeoutInterval);
 }
 
 // ===================================SLITHER FUNCTION =================================
 function slither() {
-    // update the state of the game by updating the contents of the snake array
-    updateStateOfGame()
+    // updates the contents of the snake array
+    updateGame()
 
-    // redraw user interface
     // the last object in the snake array is going to be the head of the snake
-    redrawUserInterface()
+    redrawGameBoard()
 
     // schedule slither if game is still runnning
     if (gameState === "running") {
@@ -134,121 +130,100 @@ function slither() {
     }
 }
 
-// =======================GAME RUNNING- CHECKS CURRENT SNAKE HEAD POSITION ===============================
-// =======================GAME RUNNING- CHECKS NEXT SNAKE HEAD POSITION ==================================
+// =======================UPDATE GAME STATE FUNCTION: ===============================
+// Updates everytime the snake moves, by 1 cell at a time
+// by updating the contents of the snake array
+
+
+// 1: Sets the "previousDirection" variable to the "direction" so we can use the pD variable later
+// to NOT allow the snake to change directions 180 degrees/turn on itself
+
+// 2. Sets the value of snake's current head to the length of the snake array minus 1
+
+// 3. Calculates the new/next head of the snake based on where the current snake head is
+// next head will then take the the x and y positions of the current head
+
+// 4. if statements deal with the change in direction for up, down, right and left:
+    // for up we decrement the y value, because if the snake is traveling up, the y yalue is heading towards zero
+    // for down we incrememnt the y value, because if the snake is traveling down, the y yalue is heading away from zero
+    // for left we decrement the x value, because if the snake is traveling left, the x yalue is heading towards zero
+    // for right we incrememnt the x value, because if the snake is traveling right, the x yalue is heading away from zero
+
+// 5.  Before developing this function, if the snake moved off the screen it kept going
+// Now, we change the game state to over/ end the game:
+// IF the new/next head of the snake goes beyond the border wall width 
+// OR height in either direction
+// OR if the snake ran into itself. To check this, we use snake.some(cell)
+// to check if any cell of the snake matches the next head of the snake 
+// * this is very similar to how we relocate the food to not be in the same position as the snake
+
+// 6. When the game state is over: 
+// the lose sound plays
+// the playcount increases by 1, which is what initates the game for player 2
+
+// 7.  if none of those conditions are met, the gamestate is not over
+// .push adds the next/new head of the snake to the end of the existing array
+// regardless of whether or not the snake eats the food source, 
+// we always need to push the next head of the snake on top of the current head,
+
+
 // =======================GAME RUNNING- IF SNAKE IS EATING: ADDS POINTS ==================================
 // =======================GAME RUNNING- IF SNAKE IS EATING: ADDS LENGTH TO SNAKE ARRAY====================
 // =======================GAME RUNNING- IF SNAKE IS EATING: RELOCATES FOOD ===============================
 // =======================GAME RUNNING- ENDS GAME IF SNAKE TOUCHES WALL OR ITSELF=========================
 
-// to draw the snake, we need to loop through the snake array and draw each cell individually
-// to do that we use a for each loop
-// snake.forEach(function(cell) {
-//     let x = cell.x;
-//     let y = cell.y;
-//     gameboard.children[(width * y) + x].classList.add("snake");
-// })
 
-// to get the snake to move by pressing the spacebar:
-
-// first we need a function that will update the state
-// of the game and redraw the snake for the user interface
-
-
-// function updates everytime the snake moves by 1 cell at a time
-// by updating the contents of the snake array
-// calculates the next head of the snake based on the current head of the snake
-function updateStateOfGame() {
-
-    // setting the previous direction to the direction 
-    // so we can use the variable later in the slither function to not
-    // allow the snake to perform a 180 and change/turn on itself
-    previousDirection = direction;
-
-    // current head is the last element in the snake array
-    // we get that by getting the index of snake.length and subtracting 1
+function updateGame() {
     let currentHeadOfSnake = snake[snake.length - 1];
 
-    // update the update state function to reflect new head of the snake
-    let nextHeadOfSnake = {
+    let newHeadOfSnake = {
         x: currentHeadOfSnake.x,
         y: currentHeadOfSnake.y
     };
 
-    // these if statements deal with the change in direction for up, down, right and left:
-    // for up we decrement the y value
-    // because if the snake is traveling up, the y yalue is heading towards zero
+    // snake changing directions when player presses key
+    previousDirection = direction;
     if (direction === "up") {
-        nextHeadOfSnake.y--;
+        newHeadOfSnake.y--;
     }
 
-    // for down we incrememnt the y value
-    // because if the snake is traveling down, the y yalue is heading away from zero
     if (direction === "down") {
-        nextHeadOfSnake.y++;
+        newHeadOfSnake.y++;
     }
 
-    // for left we decrement the y value
-    // because if the snake is traveling left, the x yalue is heading towards zero
     if (direction === "left") {
-        nextHeadOfSnake.x--;
+        newHeadOfSnake.x--;
     }
 
-    // for right we incrememnt the y value
-    // because if the snake is traveling right, the x yalue is heading away from zero
     if (direction === "right") {
-        nextHeadOfSnake.x++;
+        newHeadOfSnake.x++;
     }
 
-    // Conditions to end the game if the snake tries to manuever off the board
-    // currently if the snake moves off the screen it keeps going
-    // so we need a way to prevent that and end the game if the snake
-    // touches the border wall of the game
+    // If statements to end the game if snake goes outside width or height
+    // of gameboard in either direction or if the snake touches part of its
+    // own body 
 
-    // the first part of the if statement checks if the next head of the snake 
-    // if less than the entire width of the game board
-
-    // similarly, the next thing we want to account for is if the next head
-    // of the snake is the width of the borad OR less than 0 to account for if the
-    // snake tries to run into the wall going left x < 0 OR if the snake
-    // tries to go outside the full height of the board OR less than 0 y axis
-
-    // the last part of the if statement needs to account for the 
-    // snake running into itself- if this happend we want the game to end
-    // this is going to be very similar to how we relocated the food to not 
-    // be in the same position as the snake so we're going to check to see if any cell
-    // of the snake matches the next head of the snake using snake.some(cell)
-
-    if (nextHeadOfSnake.x >= width || nextHeadOfSnake.x < 0 ||
-        nextHeadOfSnake.y >= height || nextHeadOfSnake.y < 0 ||
-        snake.some(cell => cell.x === nextHeadOfSnake.x && cell.y === nextHeadOfSnake.y)
+    if (newHeadOfSnake.x >= width || newHeadOfSnake.x < 0 ||
+        newHeadOfSnake.y >= height || newHeadOfSnake.y < 0 ||
+        snake.some(cell => cell.x === newHeadOfSnake.x && cell.y === newHeadOfSnake.y)
     ) {
         // then the game ends
-
         gameState = "over"
 
-        // ??? wondering if here is where I add a condition to start the game for player 2
-        // like changing game state to lost for player one
 
         // setting playcount from 0 to 1, which is basically setting up a next round for player 2
         if(gameState === "over") {
             loseSound.play();
 
             if(playCount === 0) {
-                console.log(gameState);
+                // console.log(gameState);
                 playCount++;
                 startPlayerTwo();
             }
         }
 
     } else {
-
-        // .push adds the next head to the end of the existing array
-        // placing this here because regardless of whether or not the
-        // snake eats the food source, we always need to push the next head
-        // of the snake on top of the current head
-
-        snake.push(nextHeadOfSnake);
+        snake.push(newHeadOfSnake);
 
         // At the moment when the snake goes after the food source, nothing happens
         // we want the snake to grow by one cell everytime it encounters the position
@@ -261,7 +236,7 @@ function updateStateOfGame() {
         // but we only want to remove the first element  of the snake array if we are eating the food source
         // so we'll add an else statement
 
-        if (nextHeadOfSnake.x === food.x && nextHeadOfSnake.y === food.y) {
+        if (newHeadOfSnake.x === food.x && newHeadOfSnake.y === food.y) {
             // eating the food increases the score by one
             score++
 
@@ -293,7 +268,7 @@ function updateStateOfGame() {
 
 
 // function to redraw user interface
-function redrawUserInterface() {
+function redrawGameBoard() {
 
     // This repeats the single div on the gameboard
     // that was initially set up in the html
@@ -338,6 +313,7 @@ function redrawUserInterface() {
 
       // draw image of food
     let foodImg = document.createElement("img");
+    
     foodImg.className = "food";
     foodImg.src = "apple.png";
 
@@ -445,9 +421,11 @@ onkeydown = (function (keyboardEvent) {
 
 
     // This allows the snake to move directions
+
     // adding the previousdirection in the opposite so the snake cannot
     // fold back on itself by only moving in a direction that is not the
     // complete opposite of the previous direction
+
     if (code === "ArrowUp" && previousDirection !== "down") {
         direction = "up";
     }

@@ -71,6 +71,7 @@ p {
     border: black;
     border: 1px;
     display: flex;
+    border:dotted;
 }
 
 .snake {
