@@ -25,13 +25,13 @@ h6 {
     font-size: 1vmin;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding:0%;
-    margin:1%;
+    margin:0%;
 }
 
 #score {
     border: solid;
     border-radius: 10%;
-    margin: 1%;
+    margin-bottom:1%;
     padding-left: 1%;
     padding-right: 1%;
     color: white;
