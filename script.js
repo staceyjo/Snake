@@ -317,7 +317,6 @@ function redrawGameBoard() {
         gameboard.children[(width * y) + x].appendChild(innerDiv)
     })
 
-
     // Drawing the food on the gameboard
     let foodImg = document.createElement("img");
     foodImg.className = "food";
@@ -328,7 +327,6 @@ function redrawGameBoard() {
 
     // Updates the score
     scoreSpan.textContent = score;
-
 }
 
 // ================================RELOCATING THE FOOD ============================
@@ -358,60 +356,32 @@ function relocateFood() {
 
 }
 
-// ================================ON KEY DOWN: TRIGGERS GAME START ==========================================
-// ================================ON KEY DOWN: ALLOWS SNAKE TO MOVE USING ARROWS ============================
-// ================================ON KEY DOWN: DOES NOT ALLOW SNAKE TO TURN 180 =============================
+// ================================STARTING GAME ============================
+// 1. Game start happens in the onkeydown function
+    // onkeydown function is used when you press on a key, i.e the spacebar
 
-// Initial game kick off happens in the onkeydown function
-// onkeydown function is used when you press on a key, i.e the spacebar
-// keyboardEvent is the object
+// 2. keyboardEvent is an object, each key has a code
+    // console.log(keyboardEvent), you can see everytime you press the any key
+    // and the code name: "Space", "ArrowRight", "ArrowLeft", 
+    // "ArrowUp", "ArrowDown", "Enter", "Escape"
 
-// when you open the console, you can see everytime you press the any key
-// each key has a code, "Space", "ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown", "Enter", "Escape"
+// 3. When the page is loaded, the game state is set to ready
+    // Pressing any key changes the change state from ready to running
+    // since the start function is invoked when a key is pressed
 
-// right now, pressing any key changes the change state from ready
-// to start
+// 4. Added if statements to prevent snake from folding back on itself
+    // so it cannot move in the exact opposite of the previous direction
 
 onkeydown = (function (keyboardEvent) {
-    // console.log(keyboardEvent);
-
     let code = keyboardEvent.code;
-
-    // This just prints the keyboard code strings for each press
     console.log(code)
 
-    // When the gamestate === ready, the game is ready to start
     // This triggers game to start if any key is pressed
     if (gameState === "ready") {
         start();
-
-        // Player 1 clicks the start button, which changes the game to 
-        // "running"- which means player 1 is currently playing the game.
-        // if(gameState = "ready")
-
-        // Add onclick when the player 1 clicks the start button, 
-        // then invoke the start function
-
-        // then hide player 1 start button while player 1 is playing
-        
-        // When player 1 gamestate changes to "end":
-        // Player 2 start button should appear
-
-        // Add onclick when player 2 clicks the start button
-        // hide player 1 start button
-
-        // when player 2 gamestate changes to "end"
-        // reset/New Game button should appear
-
     }
 
-
-    // This allows the snake to move directions
-
-    // adding the previousdirection in the opposite so the snake cannot
-    // fold back on itself by only moving in a direction that is not the
-    // complete opposite of the previous direction
-
+    // preventing complete opposite of the previous direction
     if (code === "ArrowUp" && previousDirection !== "down") {
         direction = "up";
     }
@@ -430,12 +400,12 @@ onkeydown = (function (keyboardEvent) {
 
 })
 
-// add reset / New Game button
+// ================================RESET BUTTON ============================
 resetBtn.addEventListener("click", () => {
     window.location.reload()
 })
 
-// this reset the game for player 2 when the playcount is incremented 
+// ================================TWO-PLAYER FUNCTION ============================
 function startPlayerTwo() {
     score = 0;
     scoreSpan = document.querySelector("#score-span-two");
@@ -456,3 +426,28 @@ function startPlayerTwo() {
 
     gameState = "ready";
 }
+
+// Other things I would do: 
+
+// Add start screen or start button
+// Randomize the food items
+// Add an end screen
+// Add emoji eyes to my snake head
+
+        // Player 1 clicks the start button, which changes the game to 
+        // "running"- which means player 1 is currently playing the game.
+        // if(gameState = "ready")
+
+        // Add onclick when the player 1 clicks the start button, 
+        // then invoke the start function
+
+        // then hide player 1 start button while player 1 is playing
+        
+        // When player 1 gamestate changes to "end":
+        // Player 2 start button should appear
+
+        // Add onclick when player 2 clicks the start button
+        // hide player 1 start button
+
+        // when player 2 gamestate changes to "end"
+        // reset/New Game button should appear
