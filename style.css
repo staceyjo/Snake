@@ -21,15 +21,23 @@ h1 {
 }
 
 h6 {
-    color: #11FFEE;
+    color: #24b1c7;
     font-size: 1vmin;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding:1%;
     margin:1%;
 }
 
+#score {
+    border: solid;
+    border-radius: 10%;
+    margin: 0%;
+    padding: .5%;
+    color: aliceblue;
+}
+
 p {
-    color: #0000FF;
+    color: #3a24c7;
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: 400;
@@ -51,6 +59,33 @@ p {
     margin: 2%;
     padding: 1%;
     align-items: center;
+    flex-direction: column;
+
+}
+#resetBtn:hover {
+    background-color:#3a24c7;
+    color: white;
+}
+
+#startBtn {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 2vmin;
+    color: black;
+    background-color:#C724B1;
+    border:solid;
+    border-color: rgba(225,245,225,0.9);
+    border-radius: 10%;
+    cursor: pointer;
+    margin: 1%;
+    padding: 1%;
+    align-items: center;
+    flex-direction: column;
+}
+
+#startBtn:hover {
+    background-color:#3a24c7;
+    color: white;
 }
 
 #gameContainer {

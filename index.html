@@ -20,8 +20,15 @@
         
 
         <div id = "gameContainer">
-            <h6>👉PRESS ANY KEY TO START &#38; USE ARROW KEYS TO PLAY👈</h6>
+            <h6>👉 CLICK START OR PRESS ANY KEY TO START 👈</h6>
 
+            <div class = "buttons">
+                <!-- start button  -->
+                <div id = "start-screen" class = "screen" style = "display: block;">
+                    <button id = "startBtn" onclick = "start()">START</button>
+                </div>
+            </div>
+            <h6>👉 USE ARROW KEYS TO MOVE SNAKE 👈</h6>
 
             <div id="gameboard">
                 <!-- This div will later be multiplied 144 times in JS to create the gameboard
@@ -33,15 +40,12 @@
                     <strong>Close window then press any key to start</strong> 
                 </div> -->
             </div>
-
-            <div class = "buttons">
-                <!-- <button id ="playerOneStartBtn" onclick="p1Start()">Player 1 START</button> -->
-    
+        
                 <!-- reset button  -->
                 <button id ="resetBtn">RESET</button>
     
-                <!-- <button id ="playerTwoStartBtn" onclick="startPlayerTwo()">Player 2 START</button> -->
             </div>
+
         </div>
 
     <script type="text/javascript" src="script.js"></script>
