@@ -25,15 +25,15 @@ h6 {
     color: #24b1c7;
     font-size: 1vmin;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding:1%;
-    margin:0%;
+    padding:0%;
+    margin:1%;
 }
 
 #score {
     border: solid;
     border-radius: 10%;
     margin: 0%;
-    padding: 5px;
+    padding: 0%;
     color: white;
     background-color: #3a24c7
 }
