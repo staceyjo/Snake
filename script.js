@@ -263,36 +263,6 @@ function updateGame() {
 // food image to the gameboad
 
 
-// let foodItemIndex = 0; // first cell
-
-// const foodItemsArray = [
-//     '🐁',
-//     '🍇',
-//     '🍉',
-//     '🍈',
-//     '🍓',
-//     '🍍',
-//     '🍌',
-//     '🥝',
-//     '🍏',
-//     '🍎',
-//     '🍔',
-//     '🍅',
-//     '🥚',
-//   ];
-
- // async function createFood() {
-    //     foodItemIndex = Math.floor(Math.random() * numCells);
-    //     if (currentSnake.includes(foodItemIndex)) {
-    //       await wait(100);
-    //       createFood();
-    //     } else {
-    //       cells[foodItemIndex].classList.add('food-item');
-    //       cells[foodItemIndex].innerText = randomElementFromArray(foodItemsArray);
-    //     }
-    //   }
-
-
 function redrawGameBoard() {
     gameboard.innerHTML = "<div></div>".repeat(width * height);
 
@@ -429,10 +399,38 @@ function startPlayerTwo() {
 
 // Other things I would do: 
 
-// Add start screen or start button
 // Randomize the food items
 // Add an end screen
 // Add emoji eyes to my snake head
+
+// let foodItemIndex = 0; // first cell
+
+// const foodItemsArray = [
+//     '🐁',
+//     '🍇',
+//     '🍉',
+//     '🍈',
+//     '🍓',
+//     '🍍',
+//     '🍌',
+//     '🥝',
+//     '🍏',
+//     '🍎',
+//     '🍔',
+//     '🍅',
+//     '🥚',
+//   ];
+
+ // async function createFood() {
+    //     foodItemIndex = Math.floor(Math.random() * numCells);
+    //     if (currentSnake.includes(foodItemIndex)) {
+    //       await wait(100);
+    //       createFood();
+    //     } else {
+    //       cells[foodItemIndex].classList.add('food-item');
+    //       cells[foodItemIndex].innerText = randomElementFromArray(foodItemsArray);
+    //     }
+    //   }
 
         // Player 1 clicks the start button, which changes the game to 
         // "running"- which means player 1 is currently playing the game.
