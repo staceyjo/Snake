@@ -68,6 +68,9 @@ let food;
 
 // Want to eventually randomize the food items
 // right now set to use image of apple
+
+// let foodItemIndex = 0; // first cell
+
 // const foodItemsArray = [
 //     '🐁',
 //     '🍇',
@@ -151,26 +154,37 @@ function slither() {
 
 // 5.  Before developing this function, if the snake moved off the screen it kept going
 // Now, we change the game state to over/ end the game:
-// IF the new/next head of the snake goes beyond the border wall width 
-// OR height in either direction
-// OR if the snake ran into itself. To check this, we use snake.some(cell)
-// to check if any cell of the snake matches the next head of the snake 
-// * this is very similar to how we relocate the food to not be in the same position as the snake
+    // IF the new/next head of the snake goes beyond the border wall width 
+    // OR height in either direction
+    // OR if the snake ran into itself. To check this, we use snake.some(cell)
+    // to check if any cell of the snake matches the next head of the snake 
+    // * this is very similar to how we relocate the food to not be in the same position as the snake
 
 // 6. When the game state is over: 
-// the lose sound plays
-// the playcount increases by 1, which is what initates the game for player 2
+    // the lose sound plays
+    // the playcount increases by 1, which is what initates the game for player 2
 
 // 7.  if none of those conditions are met, the gamestate is not over
-// .push adds the next/new head of the snake to the end of the existing array
-// regardless of whether or not the snake eats the food source, 
-// we always need to push the next head of the snake on top of the current head,
+    // .push adds the next/new head of the snake to the end of the existing array
+    // regardless of whether or not the snake eats the food source, 
+    // we always need to push the next head of the snake on top of the current head,
+
+// 8. At the moment when the snake goes after the food source, nothing happens
+    // we want the snake to grow by one cell everytime it encounters the position of 
+    // where the food currently is
+
+    // Then we want the position of the food source to change to somewhere else on the grid,
+    // in a position the snake does not currently occupy
+    
+    // if the next head of the snake is the same position as the food source
+    // then we know the snake is "eating" the food and we can add 1 point
+
+// 9. To make the game challenging, we'll shorten the time interval by 10% 
+// each time the snake eats food by setting the timeout to be 90%,
+//  by multiplying the time interval by 0.9
 
 
-// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS POINTS ==================================
-// =======================GAME RUNNING- IF SNAKE IS EATING: ADDS LENGTH TO SNAKE ARRAY====================
-// =======================GAME RUNNING- IF SNAKE IS EATING: RELOCATES FOOD ===============================
-// =======================GAME RUNNING- ENDS GAME IF SNAKE TOUCHES WALL OR ITSELF=========================
+// =======================================GAME RUNNING ==========================================
 
 
 function updateGame() {
@@ -225,31 +239,11 @@ function updateGame() {
     } else {
         snake.push(newHeadOfSnake);
 
-        // At the moment when the snake goes after the food source, nothing happens
-        // we want the snake to grow by one cell everytime it encounters the position
-        // where the food currently is
-
-        // then we want the position of the food source to change to somewhere else on the grid
-        // if the next head of the snake is the same position as the food source
-        // then we know the snake is eating the food
-
-        // but we only want to remove the first element  of the snake array if we are eating the food source
-        // so we'll add an else statement
-
+        // if next head of snake matches food positon, increase score by 1, play sound then move food
         if (newHeadOfSnake.x === food.x && newHeadOfSnake.y === food.y) {
-            // eating the food increases the score by one
             score++
-
-            // adding gulp sound when snake head is same as food 
             gulpSound.play();
-
-            // move the food after the snake eats it
             relocateFood();
-
-            // to make the game challenging, we'll shorten 
-            // the time interval by 10% each time the snake eats food
-            // by setting the timeout to be 90% by multiplying the 
-            // timeout interval by 0.9
             timeoutInterval = timeoutInterval * 0.9
 
         } else {
@@ -316,6 +310,17 @@ function redrawGameBoard() {
     
     foodImg.className = "food";
     foodImg.src = "apple.png";
+
+    async function createFood() {
+        foodItemIndex = Math.floor(Math.random() * numCells);
+        if (currentSnake.includes(foodItemIndex)) {
+          await wait(100);
+          createFood();
+        } else {
+          cells[foodItemIndex].classList.add('food-item');
+          cells[foodItemIndex].innerText = randomElementFromArray(foodItemsArray);
+        }
+      }
 
         // Want the snake to eat the food and grow in length by one cell each time
         // so instead of using the x and y coordinates from the snake
