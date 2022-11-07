@@ -325,7 +325,7 @@ function redrawGameBoard() {
     // Adding food to the gameboad
     gameboard.children[ (width * food.y) + food.x].appendChild(foodImg);
 
-    // Updates the score
+    // Updates the score on html when point is added
     scoreSpan.textContent = score;
 }
 
