@@ -66,28 +66,6 @@ let previousDirection = "";
 // Setting food variable, was previouly a red cell
 let food;
 
-// Want to eventually randomize the food items
-// right now set to use image of apple
-
-// let foodItemIndex = 0; // first cell
-
-// const foodItemsArray = [
-//     '🐁',
-//     '🍇',
-//     '🍉',
-//     '🍈',
-//     '🍓',
-//     '🍍',
-//     '🍌',
-//     '🥝',
-//     '🍏',
-//     '🍎',
-//     '🍔',
-//     '🍅',
-//     '🥚',
-//   ];
-
-
 // ===================================RESET BUTTON =================================
 const resetBtn = document.querySelector("#resetBtn");
 
@@ -276,9 +254,43 @@ function updateGame() {
 // 6. gameboard.children will give me all of the divs on the board
         //.classList.add() will add a new class to the gameboard
         //.appendChild will add the new innerdiv as the snake grows
-        
-// 7. To draw the food
 
+// 7. Using the dom to draw the food by creating an element, giving it a class name of food
+// then using .scr to select the picture saved in the file.
+// eventually I want to randomly select a food item from an array of emojis 
+
+// 8. gameboard.children[ (width * food.y) + food.x].appendChild(foodImg) adds the 
+// food image to the gameboad
+
+
+// let foodItemIndex = 0; // first cell
+
+// const foodItemsArray = [
+//     '🐁',
+//     '🍇',
+//     '🍉',
+//     '🍈',
+//     '🍓',
+//     '🍍',
+//     '🍌',
+//     '🥝',
+//     '🍏',
+//     '🍎',
+//     '🍔',
+//     '🍅',
+//     '🥚',
+//   ];
+
+ // async function createFood() {
+    //     foodItemIndex = Math.floor(Math.random() * numCells);
+    //     if (currentSnake.includes(foodItemIndex)) {
+    //       await wait(100);
+    //       createFood();
+    //     } else {
+    //       cells[foodItemIndex].classList.add('food-item');
+    //       cells[foodItemIndex].innerText = randomElementFromArray(foodItemsArray);
+    //     }
+    //   }
 
 
 function redrawGameBoard() {
@@ -306,76 +318,41 @@ function redrawGameBoard() {
     })
 
 
-    // Drawing the food
-        // Adding a new section to the redraw user interface to show our food. 
-
-      // draw image of food
+    // Drawing the food on the gameboard
     let foodImg = document.createElement("img");
-    
     foodImg.className = "food";
     foodImg.src = "apple.png";
-
-    // async function createFood() {
-    //     foodItemIndex = Math.floor(Math.random() * numCells);
-    //     if (currentSnake.includes(foodItemIndex)) {
-    //       await wait(100);
-    //       createFood();
-    //     } else {
-    //       cells[foodItemIndex].classList.add('food-item');
-    //       cells[foodItemIndex].innerText = randomElementFromArray(foodItemsArray);
-    //     }
-    //   }
-
-        // Want the snake to eat the food and grow in length by one cell each time
-        // so instead of using the x and y coordinates from the snake
-        // we use food.x and food.y
-
+    
+    // Adding food to the gameboad
     gameboard.children[ (width * food.y) + food.x].appendChild(foodImg);
 
-
-    // Update the score for player one
+    // Updates the score
     scoreSpan.textContent = score;
 
 }
 
-// ================================MOVES FOOD TO POSITION WHERE SNAKE ARRAY IS NOT ============================
-// Function to move the food after the snake eats it
+// ================================RELOCATING THE FOOD ============================
+// 1. Generate a new location for the food variable after the snake eats it 
+// Use Math.floor(Math.random() * width) to generate a random number between 0 and 14 (width is 15)
 
-// Need to generate a new location for the food variable
-// and check whether or not the snake shares the same position of where it was
-// to find the new position, we can use Math.random to find a
-// random number between and 11
-// and set a condition as an if statement to avoid the snake's position
+// 2. Set a condition as an if statement to avoid the snake's position
+// so the position the food is never on top of where the snake is.
+
+// 3. Using .some() method checks if the snake location and the food intercept
+// if they do- we call the function on itself 
+
+// Calling the function on itself now makes this a recursive function
+// it will keep running the function until it finds a location to position 
+// the food where the snake is not located 
+
+
 function relocateFood() {
-    //generate random number bewtween 0 and 1
-    // Math.random()
-
-    //remove decimal places
-    // Math.floor()
-
-    // generates random number between 0 and 11 (width is 12)
-    // Math.floor(Math.random() * width)
-
-
     food = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * height)
       };
     
-
-    // Issue I'm running into is the food lands on top of 
-    // the snake during a game start or after the snake eats the food
-    // the new food's location is on top of the snake
-    // that shouldn't happen. So to prevent that we need
-    // to check if the snake location and the relocated food share the
-    // intercept. using .some() method
-
     if (snake.some(cell => cell.x === food.x && cell.y === food.y)) {
-
-        // if this is true, relocate the food
-        // calling the function on itself now makes this a recursive function
-        // it will keep running the function until it finds a location where the snake is
-        // not located
         relocateFood();
     }
 
