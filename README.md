@@ -4,6 +4,7 @@ That phone shipped out 160 million units, and only had 3 games on it- Snake, Mem
 
 Play a cuter version of this classic retro mobile phone game in your web browser using your keyboard! 
 
+# How to Play:
 1. Press any key to start as Player 1. 
 2. Use the arrow keys (up, down, left, right) to guide the direction of the snake to eat the food.
 3. Avoid the running into the wall and/or running into the body of the snake. 
@@ -12,8 +13,7 @@ Play a cuter version of this classic retro mobile phone game in your web browser
 7. Press RESTART button beneath the game board to start new game
 8. Enjoy & good luck! (My high score is 19)
 
-Click to play: 
-
+# Click to play: 
 https://staceyjo.github.io/snake/
 
 This game was created using VS Code, CSS, HTML and JavaScript and displayed on gitHub pages.
