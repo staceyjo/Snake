@@ -33,6 +33,7 @@ h6 {
     border: solid;
     border-radius: 10%;
     margin: 0%;
+    padding: 25px;
     color: aliceblue;
     background-color: darkgrey;
 }
