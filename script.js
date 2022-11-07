@@ -184,7 +184,7 @@ function slither() {
 //  by multiplying the time interval by 0.9
 
 
-// =======================================GAME RUNNING ==========================================
+// =======================================GAME RUNNING updateGame ==========================================
 
 
 function updateGame() {
@@ -254,55 +254,59 @@ function updateGame() {
 
 }
 
-// =======================GAME RUNNING- REPEATS DIVS FOR CELLS FOR 12x12 GAMEBOARD ======================
-// =======================GAME RUNNING- LOOPS THROUGH SNAKE ARRAY TO DRAW SNAKE ON GAMEBOARD ============
-// =======================GAME RUNNING- CREATES INNER DIVS THAT CHANGES COLORS OF THE SNAKE =============
-// =======================GAME RUNNING- DRAWS FOOD ON THE BOARD =========================================
-// =======================GAME RUNNING- HOUSES SCORE TEXT CONTENT =======================================
+
+// =======================================GAME RUNNING redrawGameBoard ==========================================
+// 1. The innerHTML property sets or returns the HTML content (inner HTML) of an element.
+    // Using this to repeat the single <div></div> created in HTML 225 times, for 15 x 15 gameboard cells
+
+// 2. To draw the snake on grid, we need to loop through the snake array and draw each cell individually
+    // to loop through the snake array, we use a for each loop
+
+// 3. We can alter the appearance of the snake by creating an innerDiv variable 
+    // and add it to the snake class so we can manipulate the colors and margin
+
+// 4. To change the color values of the snake - we use the the hueChange variable 
+    // const hueChange = Math.floor(Math.random() * 360)
+    // innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 71%)`;
+
+// 5. To gradually make smaller towards the tail:
+    // let margin = Math.min((snake.length - index) * 2, 32);
+    // innerDiv.style.margin = `${margin}%` 
+    
+// 6. gameboard.children will give me all of the divs on the board
+        //.classList.add() will add a new class to the gameboard
+        //.appendChild will add the new innerdiv as the snake grows
+        
+// 7. To draw the food
 
 
-// function to redraw user interface
+
 function redrawGameBoard() {
-
-    // This repeats the single div on the gameboard
-    // that was initially set up in the html
-    // one div multiplied by width & height (12 x 12- 144 gameboard cells
-    // the snake and apple can occupy
     gameboard.innerHTML = "<div></div>".repeat(width * height);
 
     // Draw the snake    
-    // to draw the snake on grid, we need to loop through the snake array and draw each cell individually
-    // to do that we use a for each loop
     snake.forEach(function (cell, index) {
         let x = cell.x;
         let y = cell.y;
 
-
-        // The children of the gameboard is the snake array
-            // creating new inner div for snake class to then alter the appearance
+        // adds inner div to snake class we can further manipulate
         let innerDiv = document.createElement("div");
         innerDiv.className = "snake";
 
-            // changing the color values of the snake - works with the hueChange variable
-            // at the top to randomize the colors
-        let hue = hueChange + (index * 27)
-
-                // https://convertingcolors.com/rgb-color-60_65_70.html
-        
+        // changes snake color
+        let hue = hueChange + (index * 20)
         innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 71%)`;
 
         // this gradually makes the snake smaller at the end
         let margin = Math.min((snake.length - index) * 2, 32);
         innerDiv.style.margin = `${margin}%`    
 
-        // gameboard.children will give me all of the divs on the board
-        //.classList.add() will add a new class to the gameboard
-        //.appendChild will add the new innerdiv as the snake grows
+        // adds new color with smaller margin everytime snake grows
         gameboard.children[(width * y) + x].appendChild(innerDiv)
     })
 
 
-        // Drawing the food
+    // Drawing the food
         // Adding a new section to the redraw user interface to show our food. 
 
       // draw image of food
@@ -311,16 +315,16 @@ function redrawGameBoard() {
     foodImg.className = "food";
     foodImg.src = "apple.png";
 
-    async function createFood() {
-        foodItemIndex = Math.floor(Math.random() * numCells);
-        if (currentSnake.includes(foodItemIndex)) {
-          await wait(100);
-          createFood();
-        } else {
-          cells[foodItemIndex].classList.add('food-item');
-          cells[foodItemIndex].innerText = randomElementFromArray(foodItemsArray);
-        }
-      }
+    // async function createFood() {
+    //     foodItemIndex = Math.floor(Math.random() * numCells);
+    //     if (currentSnake.includes(foodItemIndex)) {
+    //       await wait(100);
+    //       createFood();
+    //     } else {
+    //       cells[foodItemIndex].classList.add('food-item');
+    //       cells[foodItemIndex].innerText = randomElementFromArray(foodItemsArray);
+    //     }
+    //   }
 
         // Want the snake to eat the food and grow in length by one cell each time
         // so instead of using the x and y coordinates from the snake
