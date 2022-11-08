@@ -133,29 +133,15 @@ p {
     height: 100%;
 }
 
-/* .alert {
-    width: 50vmin;
-    height: 50vmin;
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-    font-size: 5vmin;
-  }
-  
-  .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 5vmin;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .closebtn:hover {
-    color: black;
-  } */
+/* #game-over {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+    display: none;
+    font-size: 60px;
+    color: red; */
+
+/* } */
 
 
     
