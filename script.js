@@ -6,8 +6,8 @@ const height = 15;
 const gameboard = document.querySelector("#gameboard");
 
 // ===================================GAME STATUS =================================
-// need a way to start the game
-let gameState = "ready"; // "ready" to start, "running" or currently playing, "over" is game end
+// "ready" to start, "running" or currently playing, "over" is game end
+let gameState = "ready"; 
 
 // ===================================GAME SPEED =================================
 // timeoutInterval set to 300 miliseconds
@@ -32,8 +32,8 @@ let playCount = 0;
 // 5th row (y: 4), occupying the 4th, 5th, 6th columns (x : 3, 4, 5)
 
 let snake = [
-    { x: 3, y: 4 }, // tail of snake
-    { x: 4, y: 4 }, // body of snake
+    { x: 3, y: 4 },
+    { x: 4, y: 4 }, 
     { x: 5, y: 4 }, // head of snake 
 ]
 
@@ -76,6 +76,8 @@ const loseSound = new Audio("lose1.wav");
 
 const backgroundSound = new Audio("backgroundmusic.mp3");
 
+const gameOverSound = new Audio("gameover.wav")
+
 
 // ===================================ON PAGE LOAD =================================
 // Calling this here places the food at a random location and redraws game whenever page is loaded
@@ -105,6 +107,7 @@ function slither() {
     // the last object in the snake array is going to be the head of the snake
     redrawGameBoard()
 
+    // setTimeout() method calls a function after a number of milliseconds.
     // schedule slither if game is still runnning
     if (gameState === "running") {
         setTimeout(slither, timeoutInterval);
@@ -271,16 +274,18 @@ function redrawGameBoard() {
         let x = cell.x;
         let y = cell.y;
 
-        // adds inner div to snake class we can further manipulate
+        // adds inner div to snake class we can further manipulate the colors
         let innerDiv = document.createElement("div");
         innerDiv.className = "snake";
 
         // changes snake color
+            // The hsla() functional notation expresses a given color according to its hue,
+            // saturation, and lightness components.
         let hue = hueChange + (index * 20)
-        innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 71%)`;
+        innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 25%)`;
 
         // this gradually makes the snake smaller at the end
-        let margin = Math.min((snake.length - index) * 2, 32);
+        let margin = Math.min((snake.length - index) * 2, 70);
         innerDiv.style.margin = `${margin}%`    
 
         // adds new color with smaller margin everytime snake grows
@@ -398,13 +403,17 @@ function startPlayerTwo() {
 }
 
 // Other things I would do: 
-
-// Randomize the food items
 // Add an end screen
+// Randomize the food items
 // Add emoji eyes to my snake head
 
-// let foodItemIndex = 0; // first cell
+// function gameOver() {
+//     gameOverSound.play()
+//     document.getElementById("game-over").style.display="block";
+// }
 
+
+// let foodItemIndex = 0; // first cell
 // const foodItemsArray = [
 //     '🐁',
 //     '🍇',
