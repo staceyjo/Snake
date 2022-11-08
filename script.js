@@ -282,7 +282,7 @@ function redrawGameBoard() {
             // The hsla() functional notation expresses a given color according to its hue,
             // saturation, and lightness components.
         let hue = hueChange + (index * 20)
-        innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 25%)`;
+        innerDiv.style.backgroundColor = `hsl(${hue}, 100%, 70%)`;
 
         // this gradually makes the snake smaller at the end
         let margin = Math.min((snake.length - index) * 2, 70);
